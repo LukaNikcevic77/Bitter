@@ -43,42 +43,60 @@ function ProfileMaker(){
 
             const verifyInput = async() => {
 
-                setTagUsed(false);
-                setUserNameUsed(false);
-                console.log("Ovo ti je tag bool: " + tagUsed + " Ovo je userNameBOol: " + userNameUsed);
+               let isTagUsed = false;
+               let  isUserNameUsed = false;
+                
+                console.log("Ovo ti je tag bool: " + isTagUsed + " Ovo je userNameBOol: " + isUserNameUsed);
                 profileList.map((profile) => {
 
                     if(profile.tag == userAt){
-                        setTagUsed(true);
+                        console.log(profile.tag);
+                        isTagUsed = true;
+                        
                         return;
                     }
-                    else if(profile.userName == userNameUsed) {
-                        setUserNameUsed(true);
+                    else if(profile.userName == userName) {
+                        console.log(profile.userName);
+                        isUserNameUsed = true;
                         return;
                     }
                 })
 
-                if(userImage == null) {
-                    return;
-                }
-                if(tagUsed || userNameUsed ){
-                    return;
-                }
-                const profileImageRef = ref(storage, `profileImages/${auth.currentUser.uid}`)
+                console.log(isTagUsed);
+                if(!isTagUsed && !isUserNameUsed && userImage != null){
+                  const profileImageRef = ref(storage, `profileImages/${auth.currentUser.uid}`)
                 uploadBytes(profileImageRef, userImage);
                 await addDoc(profileListRef, {
                     bio: userBio,
                     tag: userAt,
-                    userName: userNameUsed,
+                    userName: userName,
                     userId: auth.currentUser.uid
                 });
                 console.log("Idi dalje");
                 youAreWelcome();
+                }
+                if(isTagUsed == true){
+                    setTagUsed(true);
+                }
+                else {
+                    setTagUsed(false);
+                }
+                 if(isUserNameUsed == true){
+                    setUserNameUsed(true);
+                }
+                else {
+                    setUserNameUsed(false);
+                }
+                
+
+            
+                
+                
             }
 
 
-        const [tagUsed, setTagUsed] = useState(false);
-        const [userNameUsed, setUserNameUsed] = useState(false);
+          const [tagUsed, setTagUsed] = useState(false);
+          const [userNameUsed, setUserNameUsed] = useState(false);
 
         const [userImage, setUserImage] = useState(null);
         const [userAt, setUserAt] = useState('');
