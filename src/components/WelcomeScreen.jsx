@@ -1,23 +1,28 @@
 import React from "react";  
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { db } from "../firebase/firebase";
 import { LogInContext } from "../contexts/LogInContext";
 import {auth, googleProvider} from "../firebase/firebase";
-import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { collection, getDocs } from "firebase/firestore";
+
+import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 
 function WelcomeScreen(){
 
     const navigate = useNavigate();
 
-    const youAreWelcome = () => {
-        navigate("/ProfileMaker", {replace: true});
+    const youAreWelcome = (a) => {
+        navigate(a, {replace: true});
     }
 
+    const profileListRef = collection(db, "Profiles");
+    
 
-    const {loggedIn, setLoggedIn} = useContext(LogInContext);
-    const [typeOfLogin, setTypeOfLogin] = useState('');
+
+    const {loggedIn, setLoggedIn, typeOfLogin, setTypeOfLogin} = useContext(LogInContext);
+    
     const [wrongPassword, setWrongPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,12 +34,24 @@ function WelcomeScreen(){
             await createUserWithEmailAndPassword(auth, email, password);
 
         
-        youAreWelcome();
+        youAreWelcome("/ProfileMaker");
 
         } catch(err) {
             setWrongPassword(true);
         }
         
+
+    }
+
+    const anonymous = async() => {
+      try {
+        await signOut(auth);
+        setTypeOfLogin("guest");
+        youAreWelcome("/Home");
+
+      } catch (err) {
+        console.log(err);
+      }
 
     }
 
@@ -44,7 +61,7 @@ function WelcomeScreen(){
         await signInWithEmailAndPassword(auth, email, password);
 
         
-        youAreWelcome();
+        youAreWelcome("/Home");
     
     } catch(err){
         setWrongPassword(true);
@@ -56,12 +73,30 @@ function WelcomeScreen(){
     const signInGoogle = async() => {
 
         await signInWithPopup(auth, googleProvider);
-        youAreWelcome();
+
+        const profiles = await getDocs(profileListRef);
+        const filteredProfiles = profiles.docs.map((user) => ({...user.data(), id: user.id}))
+        
+        if(filteredProfiles.map((userL) => {
+          console.log(userL.userId);
+          console.log(auth.currentUser.uid);
+          console.log(userL.userId == auth.currentUser.uid);
+            if(userL.userId == auth.currentUser.uid){
+              return true;
+            }
+          })){
+          youAreWelcome("/Home");
+
+        }
+        else {
+          youAreWelcome("/ProfileMaker");
+        }
+        
 
     }
 
-
-    useEffect(() => {console.log(typeOfLogin)},[])
+    useEffect(() => {console.log(typeOfLogin)}, []);
+    
 
     if(!loggedIn){
             return (
@@ -100,10 +135,7 @@ function WelcomeScreen(){
                         
                         <button
                           className="rounded-3xl bg-white text-base text-black hover:bg-gray-500 hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-44 py-5"
-                          onClick={() => {
-                            setTypeOfLogin("guest");
-                            youAreWelcome();
-                          }}
+                          onClick={() => anonymous()}
                         >
                           Continue as Anonymous
                         </button>

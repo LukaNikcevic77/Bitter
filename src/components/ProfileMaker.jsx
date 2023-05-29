@@ -6,13 +6,11 @@ import { db } from "../firebase/firebase";
 import {getDocs, collection, addDoc } from "firebase/firestore";
 import { storage } from "../firebase/firebase";
 import { ref, uploadBytes } from "firebase/storage";
-/* 
-<p>{auth?.currentUser?.providerId.toString()}</p>
-            <p>{auth?.currentUser?.uid}</p>
-*/
+
 
 function ProfileMaker(){
 
+    
     const profileListRef = collection(db, "Profiles")
     
     const navigate = useNavigate();
@@ -46,17 +44,16 @@ function ProfileMaker(){
                let isTagUsed = false;
                let  isUserNameUsed = false;
                 
-                console.log("Ovo ti je tag bool: " + isTagUsed + " Ovo je userNameBOol: " + isUserNameUsed);
                 profileList.map((profile) => {
 
                     if(profile.tag == userAt){
-                        console.log(profile.tag);
+                        
                         isTagUsed = true;
                         
                         return;
                     }
                     else if(profile.userName == userName) {
-                        console.log(profile.userName);
+                        
                         isUserNameUsed = true;
                         return;
                     }
