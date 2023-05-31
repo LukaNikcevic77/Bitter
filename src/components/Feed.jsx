@@ -1,29 +1,29 @@
 import React from "react";  
 import { useState, useEffect, useContext } from "react";
 import {auth} from "../firebase/firebase";
-import { storage } from "../firebase/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
 import { LogInContext } from "../contexts/LogInContext";
+import { HomeContext } from "../contexts/HomeContext";
 import Post from "./Post";
 
 function Feed(props){
-    const [url, setUrl] = useState(null);
+    
+    const {getImage, url} = useContext(HomeContext);
+    
+   
     useEffect(() => {
         
     }, [])
    const {array} = props;
 
-    const getImage = async(a) => {
-        const profileImage = ref(storage, `profileImages/${a}`)
-        getDownloadURL(profileImage).then((url) => {setUrl(url)})
-    }
+    
 
     return (
         <>
             {array.map((post) => {
+                
                 getImage(post.CreatedBy);
-                return <Post img={url} uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes}/>
-                }
+                return <Post img={url} uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId}/>}
+                
             )}
         </>
     )
