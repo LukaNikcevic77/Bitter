@@ -14,6 +14,10 @@ function WelcomeScreen(){
     const navigate = useNavigate();
 
     const youAreWelcome = (a) => {
+      if(typeOfLogin != "guest"){
+        setLoggedInUSerId(auth.currentUser.uid);
+      }
+      
         navigate(a, {replace: true});
     }
 
@@ -21,7 +25,7 @@ function WelcomeScreen(){
     
 
 
-    const {loggedIn, setLoggedIn, typeOfLogin, setTypeOfLogin} = useContext(LogInContext);
+    const {loggedIn, setLoggedIn, typeOfLogin, setTypeOfLogin, setLoggedInUSerId} = useContext(LogInContext);
     
     const [wrongPassword, setWrongPassword] = useState(false);
     const [email, setEmail] = useState('');

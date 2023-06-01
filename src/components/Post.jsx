@@ -44,27 +44,39 @@ function Post(props) {
         
             
                 
-                <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20">
-                <span className="flex flex-row items-start">
-                    <img src={props.img} alt="Image" />
-                <h1>This is my uid: {props.postId}</h1>
+                <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-12 rounded-lg">
+                <span className="grid grid-cols-[2fr,12fr]">
+                    <img className="w-50 h-50 rounded-full ml-4 mt-4" src={props.img} alt="Image" />
+                <span className="col-span-1 flex flex-col items-start">
+                    <span className="flex flex-row items-center bg-blue-300 mt-4">
 
+                        {profile != null &&
+                         <>
+                         <h1 className="font-bold mr-2 text-xl">{profile.userName}</h1>
+                         <h1 className="mr-2">@{profile.tag}</h1>
+                         <h1 className="mr-2 mb-1">|</h1>
+                         <p className="text-lg mr-2">{month} {day}</p>
+                         <p>{postHours} : {postMinutes}</p>
+                         </>}
+
+                    </span>
+
+                    <span className="row-span-1 col-span-1">
+                    <h1>This is my content: {props.content}</h1>
+                    </span>
+                 </span>
                 </span>
-                <span className="flex flex-col items-center">
-                    {profile != null && <><h1>{profile.userName}</h1>
-                    <h1>{profile.tag}</h1></>}
-                </span>
+                
                     
                
-                <h1>This is my creation time:{postHours} : {postMinutes}</h1>
-                <p>THis is my creation date: {month} {day}</p>
-                <h1>This is my content: {props.content}</h1>
-                <span className="flex flex-row items-center gap-4">
-                <h1>This is my comments {props.comments.length}</h1>
-                <Like likes={props.likes} postId={props.postId}/>
-                <h1>This is my likes: {props.likes}</h1>
+                
+                
+                <span className="grid grid-cols-2 gap-4">
+
+                <Like likes={props.likes} postId={props.postId} className="col-span-2" />
+                <Comment comments={props.comments} className="col-span-2" />
                 </span>
-                <Comment comments={props.comments} />
+                
                 
             
            

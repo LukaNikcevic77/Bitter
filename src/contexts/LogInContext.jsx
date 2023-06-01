@@ -8,8 +8,9 @@ export const LogInContextProvider = (props) => {
 
     const [loggedIn, setLoggedIn] = useState("");
     const [typeOfLogin, setTypeOfLogin] = useState('');
+    const [loggedInUserId, setLoggedInUSerId] = useState(null);
     
-    const contextValue = {loggedIn, setLoggedIn, typeOfLogin, setTypeOfLogin}
+    const contextValue = {loggedIn, setLoggedIn, typeOfLogin, setTypeOfLogin, loggedInUserId, setLoggedInUSerId}
 
     return <LogInContext.Provider value={contextValue}>
            {props.children};

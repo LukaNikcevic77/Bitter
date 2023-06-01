@@ -1,6 +1,8 @@
 import React from "react";  
 import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFireFlameSimple } from "@fortawesome/free-solid-svg-icons";
 
 function Like(props) {
 
@@ -8,7 +10,7 @@ function Like(props) {
     
     const [likeAmmount, setLikeAmmount] = useState(null);
     const [liked, setLiked] = useState(null);
-
+    const [textColor, setTextColor] = useState("white");
            
     useEffect(() => {
         console.log(props.likes);
@@ -18,14 +20,15 @@ function Like(props) {
     
         return (
             <>
-            <span>
-                <h1>{likeAmmount}</h1>
-                <button className="px-5 py-2 rounded-3xl bg-opacity-0  text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none"
+            <span className="flex flex-row items-center ml-52">
+                <h1 className="mr-2">{likeAmmount}</h1>
+                <button className="text-2xl hover:text-4xl" 
                  onClick={() => {
                     if (!liked) {
                         setLikeAmmount((prevLikeAmount) => {
                           const updatedLikeAmount = prevLikeAmount + 1;
                           updatePost(props.postId, "Likes", updatedLikeAmount);
+                          setTextColor("rgb(255, 221, 67)");
                           return updatedLikeAmount;
                         });
                         setLiked(true);
@@ -33,11 +36,15 @@ function Like(props) {
                         setLikeAmmount((prevLikeAmount) => {
                           const updatedLikeAmount = prevLikeAmount - 1;
                           updatePost(props.postId, "Likes", updatedLikeAmount);
+                          setTextColor("white");
                           return updatedLikeAmount;
                         });
                         setLiked(false);
                       }
-                    }}>Update Likes</button>
+                    }}><FontAwesomeIcon icon={faFireFlameSimple}
+                     style={{color: textColor}}
+                    
+                     /></button>
             </span>
             </>
         )

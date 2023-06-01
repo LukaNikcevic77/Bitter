@@ -1,6 +1,8 @@
 import React from "react";  
 import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCommentDollar } from "@fortawesome/free-solid-svg-icons";
 
 function Comment(props) {
 
@@ -58,14 +60,18 @@ function Comment(props) {
     
         return (
             <>
-            
-                <h1>{commentAmmount.length}</h1>
-                <button className="px-5 py-2 rounded-3xl bg-opacity-0  text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none" onClick={() => commentSwitch(seeComments)}>See comments</button>
+                <span className="flex flex-row ">
+                <h1 className="mr-2 mt-0.5">{commentAmmount.length}</h1>
+                <button className="text-2xl hover:text-blue-900" onClick={() => commentSwitch(seeComments)}><FontAwesomeIcon icon={faCommentDollar} /></button>
+                </span>
                 {seeComments && commentAmmount.map((comment) => {
                 getImage(comment.uid)
                 getProfile(comment.uid);
                 return <>
-                    <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20">
+                
+
+               
+                    <div className="h-auto w-90 bg-slate-700 text-white text-base flex flex-col items-left mt-5 ml-10 col-span-2 rounded-lg">
                 <span className="flex flex-row items-start">
                     <img src={url} alt="Image" />
                 <h1>This is my uid: {comment.uid}</h1>
