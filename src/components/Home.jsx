@@ -24,8 +24,8 @@ function Home() {
         try{
             const posts = await getDocs(postListRef);
             const filteredPosts = posts.docs
-            .sort((a, b) => a.CreatedTime > b.CreatedTime ? -1 : 1)
-            .map((post) => ({...post.data(), postId: post.id}));
+            .map((post) => ({...post.data(), postId: post.id}))
+            .sort((a, b) => a.CreatedTime.toMillis() > b.CreatedTime.toMillis() ? -1 : 1);
             setPostList(filteredPosts)
            
          
@@ -64,7 +64,7 @@ function Home() {
             <button className="mt-10 px-10 py-5 rounded-3xl bg-opacity-0  text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none"
             >Log out</button>
         </div>
-        <div className="w-1/2 bg-blue-600">{postsLoaded &&  <Feed array={postList} exploreFunction={getPosts}/>}</div>
+        <div className="w-1/2 bg-blue-600 overflow-y-auto">{postsLoaded &&  <Feed array={postList} exploreFunction={getPosts}/>}</div>
         <div className="w-1/4 bg-green-600">Third column</div>
         </div>
         </HomeContextProvider>

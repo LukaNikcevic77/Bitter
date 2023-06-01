@@ -12,13 +12,13 @@ function Feed(props){
     useEffect(() => {
         
     }, []) 
-   const {array} = props;
+   const {array, exploreFunction} = props;
 
     
 
     return (
         <>
-        <MakePost />
+        <MakePost refreshDom={exploreFunction}/>
             {array.map((post) => {
                 
                 getImage(post.CreatedBy);

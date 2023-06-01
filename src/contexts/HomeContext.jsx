@@ -1,7 +1,7 @@
 import React from "react";
 import {useContext, useState, useEffect, createContext} from "react";
 import { db, storage } from "../firebase/firebase";
-import {getDocs, collection, orderBy, updateDoc, doc} from "firebase/firestore";
+import {getDocs, collection, orderBy, updateDoc, doc, addDoc, serverTimestamp} from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
 export const HomeContext = createContext(null);
@@ -9,8 +9,12 @@ export const HomeContext = createContext(null);
 export const HomeContextProvider = (props) => {
 
     const profileListRef = collection(db, "Profiles")
+    const postsListRef = collection(db, "Posts");
+
     const [profileList, setProfileList] = useState(null);
     const [url, setUrl] = useState(null);
+    const [canPost, setCanPost] = useState(false);
+    
 
     const getProfiles = async() => {
         try{
@@ -35,27 +39,45 @@ export const HomeContextProvider = (props) => {
               const profileImage = ref(storage, `profileImages/${a}`)
               getDownloadURL(profileImage).then((url) => {setUrl(url)})
               
-          }
+            }
         
-    
-          
-      useEffect(() => {
-
-          getProfiles();
-          
-          
-
-      }, [])
-
-      const giveMeProfileInfo = (a) => {
+            const giveMeProfileInfo = (a) => {
        
         
-            return profileList.find((profile) => profile.userId === a);
-      }
+              return profileList.find((profile) => profile.userId === a);
+        }
+        const addPost = async(userId, content, updateDom) => {
+
+
+          setCanPost(true);
+          const timestamp = serverTimestamp();
+          await addDoc(postsListRef, {
+            Comments: [],
+            Content: content,
+            CreatedBy: userId,
+            CreatedTime: timestamp,
+            Likes: 0
+          })
+
+          setCanPost(false);
+          updateDom();
+
+
+        }
+          
+            useEffect(() => {
+              
+              getProfiles();
+              
+              
+              
+            }, [])
+            
+            
 
     const [refreshFeed, setRefreshFeed] = useState(false);
     
-    const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url}
+    const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url, canPost, addPost}
 
     return <HomeContext.Provider value={contextValue}>
            {props.children};

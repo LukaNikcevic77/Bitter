@@ -2,13 +2,14 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
 import { LogInContext } from "../contexts/LogInContext";
-function MakePost(){
+function MakePost(props){
 
-    const {loggedInUserId} = useContext(LogInContext);
+    const {loggedInUserId, canPost} = useContext(LogInContext);
 
 
     const [profile, setProfile] = useState(null);
-    const {giveMeProfileInfo, getImage, url} = useContext(HomeContext);
+    const {giveMeProfileInfo, getImage, url, addPost} = useContext(HomeContext);
+    const {refreshDom} = props;
     const [postContent, setPostContent] = useState("");
             
 
@@ -53,9 +54,9 @@ function MakePost(){
                      style={{resize: "none"}}
                      onChange={(e) => setPostContent(e.target.value)}></textarea>
                     </span>
-                    <button
+                    <button disabled={canPost}
                      className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-10 py-5"
-                     >Throw it out!</button>
+                     onClick={() => { addPost(loggedInUserId, postContent, refreshDom)}}>Throw it out!</button>
                  </span>
                 </span>
                 
