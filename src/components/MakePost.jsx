@@ -8,8 +8,8 @@ function MakePost(props){
 
 
     const [profile, setProfile] = useState(null);
-    const {giveMeProfileInfo, getImage, url, addPost} = useContext(HomeContext);
-    const {refreshDom} = props;
+    const {giveMeProfileInfo, getImage, url, addPost, getPosts} = useContext(HomeContext);
+    
     const [postContent, setPostContent] = useState("");
             
 
@@ -52,11 +52,12 @@ function MakePost(props){
                     <textarea name="" id="" cols="40" rows="5" placeholder="What's on your mind?"
                      className="rounded-xl bg-slate-700 text-white border-none focus:outline-none outline-none:disabled pt-5 pl-5 pr-2" 
                      style={{resize: "none"}}
-                     onChange={(e) => setPostContent(e.target.value)}></textarea>
+                     onChange={(e) => setPostContent(e.target.value)}
+                     value={postContent}></textarea>
                     </span>
                     <button disabled={canPost}
                      className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-10 py-5"
-                     onClick={() => { addPost(loggedInUserId, postContent, refreshDom)}}>Throw it out!</button>
+                     onClick={() => { addPost(loggedInUserId, postContent, getPosts); setPostContent("")}}>Throw it out!</button>
                  </span>
                 </span>
                 

@@ -7,35 +7,18 @@ import { db } from "../firebase/firebase";
 import { ref, getDownloadURL } from "firebase/storage";
 import {getDocs, collection, orderBy} from "firebase/firestore";
 import { LogInContext } from "../contexts/LogInContext";
-import { HomeContextProvider } from "../contexts/HomeContext";
+import { HomeContext } from "../contexts/HomeContext";
 import Feed from "./Feed";
 
 function Home() {
     
-    const postListRef = collection(db, "Posts")
-
+   
+    const {getPosts, postsLoaded} = useContext(HomeContext);
 
     const {typeOfLogin} = useContext(LogInContext);
-    const [url, setUrl] = useState(null);
-    const [postList, setPostList] = useState(null);
-    const [postsLoaded, setPostsLoaded] = useState(false);
+   
     
-    const getPosts = async() => {
-        try{
-            const posts = await getDocs(postListRef);
-            const filteredPosts = posts.docs
-            .map((post) => ({...post.data(), postId: post.id}))
-            .sort((a, b) => a.CreatedTime.toMillis() > b.CreatedTime.toMillis() ? -1 : 1);
-            setPostList(filteredPosts)
-           
-         
-            setPostsLoaded(true);
-            
-        } catch(err) {
-          alert(err);
-        }
-          }
-          
+    
       useEffect(() => {
 
           getPosts();
@@ -47,15 +30,11 @@ function Home() {
      
 
     useEffect(() => {
-        if(typeOfLogin != "guest"){
-
-            const profileImage = ref(storage, `profileImages/${auth.currentUser.uid}`);
-            getDownloadURL(profileImage).then((url) => {setUrl(url)});
-        }
+        
     }, [])
     return (
         <>
-        <HomeContextProvider>
+        
         <div className="bg-black bg-opacity-90 text-base w-screen h-screen overflow-hidden -mb-10 pt-10 flex">
         <div className="w-1/4 pt-32 pl-16 flex flex-col items-start text-4xl">
             <button 
@@ -64,10 +43,10 @@ function Home() {
             <button className="mt-10 px-10 py-5 rounded-3xl bg-opacity-0  text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none"
             >Log out</button>
         </div>
-        <div className="w-1/2 bg-blue-600 overflow-y-auto">{postsLoaded &&  <Feed array={postList} exploreFunction={getPosts}/>}</div>
+        <div className="w-1/2 bg-blue-600 overflow-y-auto">{postsLoaded &&  <Feed/>}</div>
         <div className="w-1/4 bg-green-600">Third column</div>
         </div>
-        </HomeContextProvider>
+
         </>
     )
 }

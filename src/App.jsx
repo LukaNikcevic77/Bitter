@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import WelcomeScreen from './components/WelcomeScreen'
 import Home from './components/Home'
 import { LogInContextProvider } from './contexts/LogInContext'
+import { HomeContextProvider } from './contexts/HomeContext'
 import ProfileMaker from './components/ProfileMaker'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCertificate } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +15,7 @@ function App() {
     <>
     
     <LogInContextProvider>
+    <HomeContextProvider>
       <BrowserRouter>
       <div className="bg-black text-2xl w-screen h-20 overflow-hidden fixed">
                 <div className="bg-black">
@@ -32,6 +34,7 @@ function App() {
           <Route path='/ProfileMaker' element={<ProfileMaker/>}></Route>
         </Routes>
       </BrowserRouter>
+      </HomeContextProvider>
       </LogInContextProvider>
       
     </>

@@ -14,6 +14,9 @@ export const HomeContextProvider = (props) => {
     const [profileList, setProfileList] = useState(null);
     const [url, setUrl] = useState(null);
     const [canPost, setCanPost] = useState(false);
+
+    const [postList, setPostList] = useState(null);
+    const [postsLoaded, setPostsLoaded] = useState(false);
     
 
     const getProfiles = async() => {
@@ -64,6 +67,23 @@ export const HomeContextProvider = (props) => {
 
 
         }
+
+        const getPosts = async() => {
+        try{
+            const posts = await getDocs(postsListRef);
+            const filteredPosts = posts.docs
+            .map((post) => ({...post.data(), postId: post.id}))
+            .sort((a, b) => a.CreatedTime.toMillis() > b.CreatedTime.toMillis() ? -1 : 1);
+            setPostList(filteredPosts)
+           
+         
+            setPostsLoaded(true);
+            
+        } catch(err) {
+          alert(err);
+        }
+          }
+          
           
             useEffect(() => {
               
@@ -77,7 +97,7 @@ export const HomeContextProvider = (props) => {
 
     const [refreshFeed, setRefreshFeed] = useState(false);
     
-    const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url, canPost, addPost}
+    const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url, canPost, addPost, postList, postsLoaded, getPosts}
 
     return <HomeContext.Provider value={contextValue}>
            {props.children};
