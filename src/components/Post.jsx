@@ -72,9 +72,9 @@ function Post(props) {
                 
                 
                 <span className="grid grid-cols-2 gap-4">
-
+                
                 <Like likes={props.likes} postId={props.postId} className="col-span-2" />
-                <Comment comments={props.comments} className="col-span-2" />
+                <Comment comments={props.comments} postId={props.postId} className="col-span-2" />
                 </span>
                 
                 

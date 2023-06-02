@@ -1,7 +1,7 @@
 import React from "react";
 import {useContext, useState, useEffect, createContext} from "react";
 import { db, storage } from "../firebase/firebase";
-import {getDocs, collection, orderBy, updateDoc, doc, addDoc, serverTimestamp} from "firebase/firestore";
+import {getDocs, collection, orderBy, updateDoc, doc, addDoc, serverTimestamp, arrayUnion} from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
 export const HomeContext = createContext(null);
@@ -14,6 +14,7 @@ export const HomeContextProvider = (props) => {
     const [profileList, setProfileList] = useState(null);
     const [url, setUrl] = useState(null);
     const [canPost, setCanPost] = useState(false);
+    const [canComment, setCanComment] = useState(false);
 
     const [postList, setPostList] = useState(null);
     const [postsLoaded, setPostsLoaded] = useState(false);
@@ -67,7 +68,15 @@ export const HomeContextProvider = (props) => {
 
 
         }
-
+        const addComment = async(postId, content) => {
+          setCanComment(true);
+          const postRef = doc(db, "Posts", postId);
+             updateDoc(postRef, {
+              Comments: arrayUnion(content)
+            })
+            setCanComment(false);
+            getPosts();
+        }
         const getPosts = async() => {
         try{
             const posts = await getDocs(postsListRef);
@@ -97,7 +106,8 @@ export const HomeContextProvider = (props) => {
 
     const [refreshFeed, setRefreshFeed] = useState(false);
     
-    const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url, canPost, addPost, postList, postsLoaded, getPosts}
+    const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url,
+       canPost, addPost, postList, postsLoaded, getPosts, addComment}
 
     return <HomeContext.Provider value={contextValue}>
            {props.children};

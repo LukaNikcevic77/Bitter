@@ -35,7 +35,7 @@ function Home() {
     return (
         <>
         
-        <div className="bg-black bg-opacity-90 text-base w-screen h-screen overflow-hidden -mb-10 pt-10 flex">
+        <div className="bg-black bg-opacity-90 text-base w-screen h-screen overflow-hidden -mb-20 pt-10 flex">
         <div className="w-1/4 pt-32 pl-16 flex flex-col items-start text-4xl">
             <button 
         className="mt-10 px-10 py-5 rounded-3xl bg-opacity-0  text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none"

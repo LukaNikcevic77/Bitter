@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDollar } from "@fortawesome/free-solid-svg-icons";
-
+import MakeComment from "./MakeComment";
 function Comment(props) {
 
     const {giveMeProfileInfo, getImage, url} = useContext(HomeContext);
@@ -64,7 +64,13 @@ function Comment(props) {
                 <h1 className="mr-2 mt-0.5">{commentAmmount.length}</h1>
                 <button className="text-2xl hover:text-blue-900" onClick={() => commentSwitch(seeComments)}><FontAwesomeIcon icon={faCommentDollar} /></button>
                 </span>
-                {seeComments && commentAmmount.map((comment) => {
+                {seeComments && 
+                <>
+                
+
+                
+                <MakeComment postId={props.postId}/>
+                {commentAmmount.map((comment) => {
                 getImage(comment.uid)
                 getProfile(comment.uid);
                 return <>
@@ -89,6 +95,8 @@ function Comment(props) {
                 
             </div>
                 </> })}
+              </>  
+                }
            
             </>
         )
