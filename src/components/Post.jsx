@@ -62,7 +62,7 @@ function Post(props) {
                     </span>
 
                     <span className="row-span-1 col-span-1">
-                    <h1>This is my content: {props.content}</h1>
+                    <h1>{props.content}</h1>
                     </span>
                  </span>
                 </span>

@@ -8,6 +8,7 @@ import { ref, getDownloadURL } from "firebase/storage";
 import {getDocs, collection, orderBy} from "firebase/firestore";
 import { LogInContext } from "../contexts/LogInContext";
 import { HomeContext } from "../contexts/HomeContext";
+import ProfileTab from "./ProfileTab";
 import Feed from "./Feed";
 
 function Home() {
@@ -44,7 +45,7 @@ function Home() {
             >Log out</button>
         </div>
         <div className="w-1/2 bg-blue-600 overflow-y-auto">{postsLoaded &&  <Feed/>}</div>
-        <div className="w-1/4 bg-green-600">Third column</div>
+        <div className="w-1/4 bg-green-600 mt-10"><ProfileTab /></div>
         </div>
 
         </>

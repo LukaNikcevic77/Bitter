@@ -19,6 +19,9 @@ export const HomeContextProvider = (props) => {
     const [postList, setPostList] = useState(null);
     const [postsLoaded, setPostsLoaded] = useState(false);
     
+    const removeQuotes = (a) => {
+        return a.replace(/^"(.*)"$/, '$1');
+    }
 
     const getProfiles = async() => {
         try{
@@ -107,7 +110,7 @@ export const HomeContextProvider = (props) => {
     const [refreshFeed, setRefreshFeed] = useState(false);
     
     const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url,
-       canPost, addPost, postList, postsLoaded, getPosts, addComment}
+       canPost, addPost, postList, postsLoaded, getPosts, addComment, removeQuotes}
 
     return <HomeContext.Provider value={contextValue}>
            {props.children};
