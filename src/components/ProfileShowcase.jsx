@@ -2,41 +2,45 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
 import { LogInContext } from "../contexts/LogInContext";
-import ProfileShowcase from "./ProfileShowcase";
+function ProfileShowcase(){
 
-function ProfileTab() {
 
     const {loggedInUserId} = useContext(LogInContext);
-    const {getImage,giveMeProfileInfo,  showcaseOn, setShowcaseOn} = useContext(HomeContext);
-    const [postImage, setPostImage] = useState(null);    
-    const[loggedUserImage, setLoggedUserImage] = useState(null);
     
+    const {getImage,giveMeProfileInfo, profileToShowCase, follow} = useContext(HomeContext);
+    const [postImage, setPostImage] = useState(null);  
     const [profile, setProfile] = useState(null);
+    const [postImg, setPostImg] = useState(null);
+    const [amFollowing, setAmFollowing] = useState(false);
 
-        const getProfile = async() => {
-            if(loggedInUserId != null){
-               const retrievedData = await giveMeProfileInfo(loggedInUserId);
+    const getProfile = async() => {
+        if(profileToShowCase != null){
+           const retrievedData = await giveMeProfileInfo(profileToShowCase);
 
-            setProfile(retrievedData); 
-            getImage(loggedInUserId, setPostImage);
-            console.log(loggedUserImage)
-            }
-            
+        setProfile(retrievedData); 
+        getImage(profileToShowCase, setPostImage);
+        
+        
         }
+        
+    }
 
     useEffect(() => {
-
-        
         getProfile();
-        
-    }, [])
-
-
-    return (
-        <>
-    <div className="flex flex-col items-center w-full">
-        {loggedInUserId != null && 
-        
+      
+        if (profile !== null && profile.followers) {
+          const set = new Set(profile.followers);
+          const doesFollow = set.has(loggedInUserId);
+          if (doesFollow === true) {
+            setAmFollowing(true);
+          }
+        }
+      }, [profile, profileToShowCase, loggedInUserId]);
+    
+    
+    return (<>
+    {profileToShowCase != loggedInUserId && profileToShowCase != null && 
+    <>
         <div className="h-auto w-full bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-10 rounded-lg pl-20 pb-10">
                 <span className="grid grid-cols-[2fr,12fr]">
                     <div className="-ml-16 mt-14"  style={{ height: '5vw', width: '5vw', borderRadius: '50%' }}>
@@ -65,20 +69,23 @@ function ProfileTab() {
                     
                 </span>
                 {profile != null &&  <p className="mt-2 row-span-1 col-span-2 -ml-16">{profile.bio}</p>}
-               
             </span>
+
+            {!amFollowing && <>
+                <button className="w-full -ml-5 py-5 rounded-full bg-blue-500 hover:bg-blue-300"
+               onClick={() => {follow(profileToShowCase, loggedInUserId, "follow"); getProfile();}}>Follow</button>
+            </>}
+            {amFollowing && <>
+                <button className="w-full -ml-5 py-5 rounded-full bg-blue-300 hover:bg-blue-500"
+               onClick={() => {
+                follow(profileToShowCase, loggedInUserId, "unfollow"); getProfile();
+                }}>Unfollow</button>
+            </>}
+               
                     </div>
-            }
-            {showcaseOn && <>
-                    <ProfileShowcase />
-            </>
-
-            }
-
-    </div>
-        </>
-    )
-
+                    </>
+    }
+   </> )
 }
 
-export default ProfileTab;
+export default ProfileShowcase

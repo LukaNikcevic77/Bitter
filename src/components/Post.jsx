@@ -9,8 +9,8 @@ import Like from "./Like";
 function Post(props) {
    
                 const [profile, setProfile] = useState(null);
-
-                const {giveMeProfileInfo} = useContext(HomeContext);
+                const [postImg, setPostImg] = useState(null);
+                const {giveMeProfileInfo, getImage, setProfileToShowCast, setShowcaseOn, giveMeInfoForProfileDisplay} = useContext(HomeContext);
             
             const timestampTranslated = props.makingTime.toDate();
 
@@ -24,16 +24,16 @@ function Post(props) {
 
             const month = monthNames[timestampTranslated.getMonth()];
             const day = timestampTranslated.getDate().toString().padStart(2, "0");
+            const getProfile = async() => {
+                                    const retrievedData = await giveMeProfileInfo(props.uid);
 
+                                    setProfile(retrievedData);
+                                }
             useEffect(() => {
 
-                const getProfile = async() => {
-                    const retrievedData = await giveMeProfileInfo(props.uid);
-
-                    setProfile(retrievedData);
-                }
+                
                 getProfile();
-
+                getImage(props.uid, setPostImg);
                 
             }, [])
            
@@ -44,9 +44,10 @@ function Post(props) {
         
             
                 
-                <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-12 rounded-lg">
+                <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-12 rounded-lg hover:cursor-pointer"
+                onClick={() => {setProfileToShowCast(props.uid); setShowcaseOn(true); giveMeInfoForProfileDisplay(props.uid)}}>
                 <span className="grid grid-cols-[2fr,12fr]">
-                    <img className="w-50 h-50 rounded-full ml-4 mt-4" src={props.img} alt="Image" />
+                    <img className="ml-4 mt-4" src={postImg} alt="Image" style={{height: '2vw', width: '2vw', borderRadius: '50%'}}/>
                 <span className="col-span-1 flex flex-col items-start">
                     <span className="flex flex-row items-center bg-blue-300 mt-4">
 

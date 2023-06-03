@@ -8,7 +8,8 @@ function MakePost(props){
 
 
     const [profile, setProfile] = useState(null);
-    const {giveMeProfileInfo, getImage, url, addPost, getPosts} = useContext(HomeContext);
+    const [userProfileImage, setUserImageProfileImage] = useState(null);
+    const {giveMeProfileInfo, getImage, addPost, getPosts} = useContext(HomeContext);
     
     const [postContent, setPostContent] = useState("");
             
@@ -20,7 +21,7 @@ function MakePost(props){
                        const retrievedData = await giveMeProfileInfo(loggedInUserId);
 
                     setProfile(retrievedData); 
-                    getImage(loggedInUserId);
+                    getImage(loggedInUserId, setUserImageProfileImage);
                     }
                     
                 }
@@ -36,7 +37,7 @@ function MakePost(props){
             <>
                     <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-10 rounded-lg">
                 <span className="grid grid-cols-[2fr,12fr]">
-                    <img className="w-50 h-50 rounded-full ml-4 mt-4" src={url} alt="Image" />
+                    <img className="w-50 h-50 rounded-full ml-4 mt-4" src={userProfileImage} alt="Image" />
                 <span className="col-span-1 flex flex-col items-start">
                     <span className="flex flex-row items-center bg-blue-300 mt-4">
 

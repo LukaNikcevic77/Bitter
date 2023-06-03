@@ -8,7 +8,7 @@ import MakePost from "./MakePost";
 function Feed(props){
     
     const {getImage, url, postList} = useContext(HomeContext);
-   
+    const [postImage, setPostImage] = useState(null);    
     useEffect(() => {
         
     }, []) 
@@ -21,8 +21,8 @@ function Feed(props){
         <MakePost/>
             {postList.map((post) => {
                 
-                getImage(post.CreatedBy);
-                return <Post img={url} uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId}/>}
+                
+                return <Post uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId}/>}
                 
             )}
         </>

@@ -12,7 +12,7 @@ function MakeComment(props){
     const [profile, setProfile] = useState(null);
     const {addComment, giveMeProfileInfo, getImage, url, canComment} = useContext(HomeContext);
     const [postContent, setPostContent] = useState("");
-
+    const [postImage, setPostImage] = useState(null);    
     function stringifyObjectWithSingleQuotes(obj) {
         const str = JSON.stringify(obj, null, 4);
         return str.replace(/"([^"]+)":/g, "'$1':");
@@ -37,7 +37,7 @@ function MakeComment(props){
                        const retrievedData = await giveMeProfileInfo(loggedInUserId);
 
                     setProfile(retrievedData); 
-                    getImage(loggedInUserId);
+                    getImage(loggedInUserId, setPostImage);
 
                     }
                     
@@ -54,7 +54,7 @@ function MakeComment(props){
             <>
                     <div className="h-auto w-90 bg-slate-700 text-white text-base flex flex-col items-left mt-5  col-span-2 rounded-lg">
                 <span className="grid grid-cols-[2fr,12fr]">
-                    <img className="w-50 h-50 rounded-full bg-red-500 ml-4 mt-4" src={url} alt="Image" />
+                    <img className="w-50 h-50 rounded-full ml-4 mt-4" src={postImage} alt="Image" />
                 <span className="col-span-1 flex flex-col items-start">
                     <span className="flex flex-row items-center bg-blue-300 mt-4">
 

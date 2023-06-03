@@ -1,7 +1,7 @@
 import React from "react";
 import {useContext, useState, useEffect, createContext} from "react";
 import { db, storage } from "../firebase/firebase";
-import {getDocs, collection, orderBy, updateDoc, doc, addDoc, serverTimestamp, arrayUnion} from "firebase/firestore";
+import {getDocs, collection, orderBy, updateDoc, doc, getDoc, addDoc, serverTimestamp, arrayUnion, arrayRemove} from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
 export const HomeContext = createContext(null);
@@ -10,6 +10,9 @@ export const HomeContextProvider = (props) => {
 
     const profileListRef = collection(db, "Profiles")
     const postsListRef = collection(db, "Posts");
+    const [showcaseOn, setShowcaseOn] = useState(false);
+    const [profileToShowCase, setProfileToShowCast] = useState(null);
+    const [profileToShowCaseObject, setProfileToShowCaseObject] = useState(null);
 
     const [profileList, setProfileList] = useState(null);
     const [url, setUrl] = useState(null);
@@ -27,7 +30,7 @@ export const HomeContextProvider = (props) => {
         try{
             const profiles = await getDocs(profileListRef);
             const filteredPosts = profiles.docs
-            .map((post) => ({...post.data()}));
+            .map((post) => ({...post.data(), profileId: post.id}));
             setProfileList(filteredPosts)
            
             
@@ -41,17 +44,78 @@ export const HomeContextProvider = (props) => {
              updateDoc(postRef, {
               [fieldToUpdate]: value
             })}
+            
+            const getImage = async(a, b) => {
 
-            const getImage = async(a) => {
               const profileImage = ref(storage, `profileImages/${a}`)
-              getDownloadURL(profileImage).then((url) => {setUrl(url)})
-              
+              getDownloadURL(profileImage).then((url) => {b(url)})
             }
+
+           const follow = async(a, b, whatToDo) => {
+            
+            let Profiles = {a: '', b: ''};
+            profileList.map((profile) => {
+              if(profile.userId === a){
+                Profiles.a = profile.profileId;
+              }
+              else if(profile.userId === b){
+                Profiles.b = profile.profileId;
+              }
+            })
+
+            if(whatToDo === "follow"){
+              const profileThatIsFollowed = doc(db, "Profiles", Profiles.a)
+            const profileThatIsFollowing = doc(db, "Profiles", Profiles.b)
+
+              await updateDoc(profileThatIsFollowed, {
+                  followers: arrayUnion(b)
+              });
+              await updateDoc(profileThatIsFollowing, {
+                following: arrayUnion(a)
+              });
+              giveMeInfoForProfileDisplay(b);
+            }
+            else if(whatToDo === "unfollow"){
+              const profileThatIsFollowed = doc(db, "Profiles", Profiles.a)
+            const profileThatIsFollowing = doc(db, "Profiles", Profiles.b)
+
+             await  updateDoc(profileThatIsFollowed, {
+                  followers: arrayRemove(b)
+              });
+             await updateDoc(profileThatIsFollowing, {
+                following: arrayRemove(a)
+              });
+              giveMeInfoForProfileDisplay(b);
+            }
+           }
         
-            const giveMeProfileInfo = (a) => {
+            const giveMeProfileInfo = async(a) => {
        
-        
-              return profileList.find((profile) => profile.userId === a);
+              if(profileList == null){
+                await getProfiles();
+                return profileList.find((profile) => profile.userId === a);
+              }
+              else {
+                return profileList.find((profile) => profile.userId === a);
+              }
+        }
+
+        const giveMeInfoForProfileDisplay = async (documentId) => {
+          try {
+            const docRef = doc(db, "Profiles", documentId);
+            const docSnapshot = await getDoc(docRef);
+            
+            if (docSnapshot.exists()) {
+              const documentData = docSnapshot.data();
+              
+              setProfileToShowCaseObject(documentData);
+            } else {
+
+              console.log("Document does not exist");
+            }
+          } catch (error) {
+            console.log("Error getting document:", error);
+          }
         }
         const addPost = async(userId, content, updateDom) => {
 
@@ -110,7 +174,8 @@ export const HomeContextProvider = (props) => {
     const [refreshFeed, setRefreshFeed] = useState(false);
     
     const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url,
-       canPost, addPost, postList, postsLoaded, getPosts, addComment, removeQuotes}
+       canPost, addPost, postList, postsLoaded, getPosts, addComment, removeQuotes, 
+      showcaseOn, setShowcaseOn, profileToShowCase, setProfileToShowCast, follow, giveMeInfoForProfileDisplay}
 
     return <HomeContext.Provider value={contextValue}>
            {props.children};
