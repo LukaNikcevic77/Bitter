@@ -7,16 +7,20 @@ function ProfileShowcase(){
 
     const {loggedInUserId} = useContext(LogInContext);
     
-    const {getImage,giveMeProfileInfo, profileToShowCase, follow} = useContext(HomeContext);
+    const {getImage,giveMeProfileInfo, profileToShowCase, follow, profileToShowCaseObject} = useContext(HomeContext);
     const [postImage, setPostImage] = useState(null);  
     const [profile, setProfile] = useState(null);
+    const [currUser, setCurrUser] = useState(null);
+
     const [postImg, setPostImg] = useState(null);
     const [amFollowing, setAmFollowing] = useState(false);
 
     const getProfile = async() => {
         if(profileToShowCase != null){
            const retrievedData = await giveMeProfileInfo(profileToShowCase);
+            const loggedUserData = await giveMeProfileInfo(loggedInUserId);
 
+        setCurrUser(loggedUserData);
         setProfile(retrievedData); 
         getImage(profileToShowCase, setPostImage);
         
@@ -73,12 +77,13 @@ function ProfileShowcase(){
 
             {!amFollowing && <>
                 <button className="w-full -ml-5 py-5 rounded-full bg-blue-500 hover:bg-blue-300"
-               onClick={() => {follow(profileToShowCase, loggedInUserId, "follow"); getProfile();}}>Follow</button>
+               onClick={() => {follow(profile, currUser, "follow"); setProfile(profileToShowCaseObject)}}>Follow</button>
             </>}
             {amFollowing && <>
                 <button className="w-full -ml-5 py-5 rounded-full bg-blue-300 hover:bg-blue-500"
                onClick={() => {
-                follow(profileToShowCase, loggedInUserId, "unfollow"); getProfile();
+                console.log(profile);
+                follow(profile, currUser, "unfollow");  setProfile(profileToShowCaseObject);
                 }}>Unfollow</button>
             </>}
                

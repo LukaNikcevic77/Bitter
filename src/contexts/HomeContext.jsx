@@ -52,41 +52,37 @@ export const HomeContextProvider = (props) => {
             }
 
            const follow = async(a, b, whatToDo) => {
-            
-            let Profiles = {a: '', b: ''};
-            profileList.map((profile) => {
-              if(profile.userId === a){
-                Profiles.a = profile.profileId;
-              }
-              else if(profile.userId === b){
-                Profiles.b = profile.profileId;
-              }
-            })
+
+                const Target = doc(db, "Profiles", a.profileId);
+                 const User = doc(db, "Profiles", b.profileId);
+
 
             if(whatToDo === "follow"){
-              const profileThatIsFollowed = doc(db, "Profiles", Profiles.a)
-            const profileThatIsFollowing = doc(db, "Profiles", Profiles.b)
+                
+               updateDoc(Target, {
+                followers: arrayUnion(b.userId)
+               })
+               updateDoc(User, {
+                following: arrayUnion(a.userId)
+               })
 
-              await updateDoc(profileThatIsFollowed, {
-                  followers: arrayUnion(b)
-              });
-              await updateDoc(profileThatIsFollowing, {
-                following: arrayUnion(a)
-              });
-              giveMeInfoForProfileDisplay(b);
             }
             else if(whatToDo === "unfollow"){
-              const profileThatIsFollowed = doc(db, "Profiles", Profiles.a)
-            const profileThatIsFollowing = doc(db, "Profiles", Profiles.b)
-
-             await  updateDoc(profileThatIsFollowed, {
-                  followers: arrayRemove(b)
-              });
-             await updateDoc(profileThatIsFollowing, {
-                following: arrayRemove(a)
-              });
-              giveMeInfoForProfileDisplay(b);
+              updateDoc(Target, {
+                followers: arrayRemove(b.userId)
+               })
+               updateDoc(User, {
+                following: arrayRemove(a.userId)
+               })
             }
+          
+            /* updateDoc(postRef, {
+              Comments: arrayUnion(content)
+            })
+            setCanComment(false);
+            getPosts();
+
+            } */
            }
         
             const giveMeProfileInfo = async(a) => {
@@ -107,7 +103,7 @@ export const HomeContextProvider = (props) => {
             
             if (docSnapshot.exists()) {
               const documentData = docSnapshot.data();
-              
+              console.log("It passed!");
               setProfileToShowCaseObject(documentData);
             } else {
 
@@ -175,7 +171,7 @@ export const HomeContextProvider = (props) => {
     
     const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url,
        canPost, addPost, postList, postsLoaded, getPosts, addComment, removeQuotes, 
-      showcaseOn, setShowcaseOn, profileToShowCase, setProfileToShowCast, follow, giveMeInfoForProfileDisplay}
+      showcaseOn, setShowcaseOn, profileToShowCase, setProfileToShowCast, follow, giveMeInfoForProfileDisplay, profileToShowCaseObject}
 
     return <HomeContext.Provider value={contextValue}>
            {props.children};
