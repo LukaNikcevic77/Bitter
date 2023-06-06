@@ -7,7 +7,7 @@ import ProfileShowcase from "./ProfileShowcase";
 function ProfileTab() {
 
     const {loggedInUserId} = useContext(LogInContext);
-    const {getImage,giveMeProfileInfo,  showcaseOn, setShowcaseOn} = useContext(HomeContext);
+    const {getImage,giveMeProfileInfo,  showcaseOn, setShowcaseOn, realTimeProfiles} = useContext(HomeContext);
     const [postImage, setPostImage] = useState(null);    
     const[loggedUserImage, setLoggedUserImage] = useState(null);
     
@@ -15,11 +15,10 @@ function ProfileTab() {
 
         const getProfile = async() => {
             if(loggedInUserId != null){
-               const retrievedData = await giveMeProfileInfo(loggedInUserId);
+               let currUserProfile = realTimeProfiles.find((profile) => profile.userId === loggedInUserId);
 
-            setProfile(retrievedData); 
+            setProfile(currUserProfile); 
             getImage(loggedInUserId, setPostImage);
-            console.log(loggedUserImage)
             }
             
         }
@@ -29,7 +28,7 @@ function ProfileTab() {
         
         getProfile();
         
-    }, [])
+    }, [realTimeProfiles])
 
 
     return (
