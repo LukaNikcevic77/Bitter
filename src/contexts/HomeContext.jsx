@@ -1,7 +1,7 @@
 import React from "react";
 import {useContext, useState, useEffect, createContext} from "react";
 import { db, storage } from "../firebase/firebase";
-import {getDocs, collection, orderBy, updateDoc, doc, getDoc, addDoc, serverTimestamp, arrayUnion, arrayRemove} from "firebase/firestore";
+import {getDocs, collection, orderBy, updateDoc, doc, getDoc, onSnapshot,  addDoc, serverTimestamp, arrayUnion, arrayRemove} from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
 export const HomeContext = createContext(null);
@@ -18,6 +18,8 @@ export const HomeContextProvider = (props) => {
     const [url, setUrl] = useState(null);
     const [canPost, setCanPost] = useState(false);
     const [canComment, setCanComment] = useState(false);
+
+    const [realTimeProfiles, setRealTimeProfiles] = useState(null);
 
     const [postList, setPostList] = useState(null);
     const [postsLoaded, setPostsLoaded] = useState(false);
@@ -96,6 +98,21 @@ export const HomeContextProvider = (props) => {
               }
         }
 
+        useEffect(() => {
+
+          onSnapshot(profileListRef, (snapshot) => {
+            let clayPiggeonArray = [];
+            snapshot.docs.forEach((doc) => {
+              clayPiggeonArray.push({...doc.data(), profileId: doc.id})
+            });
+            setRealTimeProfiles(clayPiggeonArray);
+            
+          })
+
+        }, [])
+
+        
+
         const giveMeInfoForProfileDisplay = async (documentId) => {
           try {
             const docRef = doc(db, "Profiles", documentId);
@@ -171,7 +188,7 @@ export const HomeContextProvider = (props) => {
     
     const contextValue = {refreshFeed, setRefreshFeed, profileList, giveMeProfileInfo, updatePost, getImage, url,
        canPost, addPost, postList, postsLoaded, getPosts, addComment, removeQuotes, 
-      showcaseOn, setShowcaseOn, profileToShowCase, setProfileToShowCast, follow, giveMeInfoForProfileDisplay, profileToShowCaseObject}
+      showcaseOn, setShowcaseOn, profileToShowCase, setProfileToShowCast, follow, giveMeInfoForProfileDisplay, profileToShowCaseObject, realTimeProfiles}
 
     return <HomeContext.Provider value={contextValue}>
            {props.children};

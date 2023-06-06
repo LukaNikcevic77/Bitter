@@ -7,7 +7,7 @@ function ProfileShowcase(){
 
     const {loggedInUserId} = useContext(LogInContext);
     
-    const {getImage,giveMeProfileInfo, profileToShowCase, follow, profileToShowCaseObject} = useContext(HomeContext);
+    const {getImage,giveMeProfileInfo, profileToShowCase, follow, profileToShowCaseObject, realTimeProfiles} = useContext(HomeContext);
     const [postImage, setPostImage] = useState(null);  
     const [profile, setProfile] = useState(null);
     const [currUser, setCurrUser] = useState(null);
@@ -17,11 +17,12 @@ function ProfileShowcase(){
 
     const getProfile = async() => {
         if(profileToShowCase != null){
-           const retrievedData = await giveMeProfileInfo(profileToShowCase);
-            const loggedUserData = await giveMeProfileInfo(loggedInUserId);
 
-        setCurrUser(loggedUserData);
-        setProfile(retrievedData); 
+        let currUSer = realTimeProfiles.find((profile) => profile.userId === loggedInUserId);
+        let showcaseingUser = realTimeProfiles.find((profile) => profile.userId === profileToShowCase);
+
+        setCurrUser(currUSer);
+        setProfile(showcaseingUser); 
         getImage(profileToShowCase, setPostImage);
         
         
@@ -38,8 +39,11 @@ function ProfileShowcase(){
           if (doesFollow === true) {
             setAmFollowing(true);
           }
+          else {
+            setAmFollowing(false);
+          }
         }
-      }, [profile, profileToShowCase, loggedInUserId]);
+      }, [profile, profileToShowCase, loggedInUserId, realTimeProfiles]);
     
     
     return (<>
