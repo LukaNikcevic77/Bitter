@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
 import { LogInContext } from "../contexts/LogInContext";
+import PostsByCreator from "../components/PostsByCreator";
 function ProfileShowcase(){
 
 
@@ -49,7 +50,7 @@ function ProfileShowcase(){
     return (<>
     {profileToShowCase != loggedInUserId && profileToShowCase != null && 
     <>
-        <div className="h-auto w-full bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-10 rounded-lg pl-20 pb-10">
+        <div className="h-auto w-full bg-slate-500 text-white text-base flex flex-col items-left mt-10 -mb-10 rounded-lg pl-20 pb-10 -ml-10 ">
                 <span className="grid grid-cols-[2fr,12fr]">
                     <div className="-ml-16 mt-14"  style={{ height: '5vw', width: '5vw', borderRadius: '50%' }}>
                         <img style={{ height: '5vw', width: '5vw', borderRadius: '50%' }} src={postImage} alt="Image"/>
@@ -80,11 +81,11 @@ function ProfileShowcase(){
             </span>
 
             {!amFollowing && <>
-                <button className="w-full -ml-5 py-5 rounded-full bg-blue-500 hover:bg-blue-300"
+                <button className="w-full -ml-5 py-5 mt-5 rounded-full bg-blue-500 hover:bg-blue-300"
                onClick={() => {follow(profile, currUser, "follow"); setProfile(profileToShowCaseObject)}}>Follow</button>
             </>}
             {amFollowing && <>
-                <button className="w-full -ml-5 py-5 rounded-full bg-blue-300 hover:bg-blue-500"
+                <button className="w-full -ml-5 py-5 mt-5 rounded-full bg-blue-300 hover:bg-blue-500"
                onClick={() => {
                 console.log(profile);
                 follow(profile, currUser, "unfollow");  setProfile(profileToShowCaseObject);
@@ -92,6 +93,8 @@ function ProfileShowcase(){
             </>}
                
                     </div>
+               {profile != null && <PostsByCreator targetedUser={profile.userId}/> } 
+      
                     </>
     }
    </> )

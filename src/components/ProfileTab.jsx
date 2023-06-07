@@ -2,12 +2,11 @@ import React from "react";
 import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
 import { LogInContext } from "../contexts/LogInContext";
-import ProfileShowcase from "./ProfileShowcase";
-
+import PostsByCreator from "../components/PostsByCreator";
 function ProfileTab() {
 
     const {loggedInUserId} = useContext(LogInContext);
-    const {getImage,giveMeProfileInfo,  showcaseOn, setShowcaseOn, realTimeProfiles} = useContext(HomeContext);
+    const {getImage, realTimeProfiles} = useContext(HomeContext);
     const [postImage, setPostImage] = useState(null);    
     const[loggedUserImage, setLoggedUserImage] = useState(null);
     
@@ -67,14 +66,12 @@ function ProfileTab() {
                
             </span>
                     </div>
+                   
             }
-            {showcaseOn && <>
-                    <ProfileShowcase />
-            </>
-
-            }
+            
 
     </div>
+                {profile != null &&  <PostsByCreator targetedUser={loggedInUserId}/>}
         </>
     )
 

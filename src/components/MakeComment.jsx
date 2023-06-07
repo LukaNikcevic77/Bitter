@@ -52,7 +52,7 @@ function MakeComment(props){
         <>
             {loggedInUserId != null && 
             <>
-                    <div className="h-auto w-90 bg-slate-700 text-white text-base flex flex-col items-left mt-5  col-span-2 rounded-lg">
+            <div className="h-auto w-90 bg-slate-700 text-white text-base flex flex-col items-left mt-5  col-span-2 rounded-lg">
                 <span className="grid grid-cols-[2fr,12fr]">
                     <img className="w-50 h-50 rounded-full ml-4 mt-4" src={postImage} alt="Image" />
                 <span className="col-span-1 flex flex-col items-start">
@@ -82,6 +82,8 @@ function MakeComment(props){
            
                 
             </div>
+            
+                    
             </> 
             }
         </>

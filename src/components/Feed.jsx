@@ -22,7 +22,7 @@ function Feed(props){
             {postList.map((post) => {
                 
                 
-                return <Post uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId}/>}
+                return <Post size={"big"} uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId} key={post.postId}/>}
                 
             )}
         </>

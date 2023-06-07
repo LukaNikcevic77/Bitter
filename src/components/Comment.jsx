@@ -57,16 +57,18 @@ function Comment(props) {
     
         return (
             <>
-                <span className="flex flex-row ">
+               <span className="flex flex-row ">
                 <h1 className="mr-2 mt-0.5">{commentAmmount.length}</h1>
                 <button className="text-2xl hover:text-blue-900" onClick={() => commentSwitch(seeComments)}><FontAwesomeIcon icon={faCommentDollar} /></button>
                 </span>
+                
+                
                 {seeComments && 
                 <>
                 
 
                 
-                <MakeComment postId={props.postId}/>
+                <MakeComment postId={props.postId} />
                 {commentAmmount.map((comment) => (
                         <OldComments comment={comment} />
                 ))
