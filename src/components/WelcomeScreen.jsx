@@ -10,11 +10,11 @@ import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPass
 
 
 function WelcomeScreen(){
-
+  const [typeOfLogin, setTypeOfLogin] = useState("");
     const navigate = useNavigate();
 
     const youAreWelcome = (a) => {
-      if(typeOfLogin != "guest"){
+      if (typeOfLogin !== "guest" && auth.currentUser) {
         setLoggedInUSerId(auth.currentUser.uid);
       }
       
@@ -25,7 +25,7 @@ function WelcomeScreen(){
     
 
 
-    const {loggedIn, setLoggedIn, typeOfLogin, setTypeOfLogin, setLoggedInUSerId} = useContext(LogInContext);
+    const {loggedIn, setLoggedIn, setLoggedInUSerId} = useContext(LogInContext);
     
     const [wrongPassword, setWrongPassword] = useState(false);
     const [email, setEmail] = useState('');
@@ -50,8 +50,8 @@ function WelcomeScreen(){
     const anonymous = async() => {
       try {
         await signOut(auth);
-        setTypeOfLogin("guest");
-        youAreWelcome("/Home");
+       await setTypeOfLogin("guest");
+       youAreWelcome("/Home");
 
       } catch (err) {
         console.log(err);

@@ -34,6 +34,7 @@ export const HomeContextProvider = (props) => {
         try{
             const profiles = await getDocs(profileListRef);
             const filteredPosts = profiles.docs
+            
             .map((post) => ({...post.data(), profileId: post.id}));
             setProfileList(filteredPosts)
            
@@ -110,7 +111,7 @@ export const HomeContextProvider = (props) => {
               clayPiggeonArray.push({...doc.data(), profileId: doc.id})
             });
             setRealTimeProfiles(clayPiggeonArray);
-            
+
             
           })
 

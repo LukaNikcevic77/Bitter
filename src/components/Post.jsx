@@ -10,7 +10,7 @@ function Post(props) {
    
                 const [profile, setProfile] = useState(null);
                 const [postImg, setPostImg] = useState(null);
-                const {giveMeProfileInfo, getImage, setProfileToShowCast, setShowcaseOn, giveMeInfoForProfileDisplay} = useContext(HomeContext);
+                const {giveMeProfileInfo, getImage, setProfileToShowCast, setShowcaseOn, giveMeInfoForProfileDisplay, profileList} = useContext(HomeContext);
             
             const timestampTranslated = props.makingTime.toDate();
 
@@ -25,17 +25,19 @@ function Post(props) {
             const month = monthNames[timestampTranslated.getMonth()];
             const day = timestampTranslated.getDate().toString().padStart(2, "0");
             const getProfile = async() => {
+                
                                     const retrievedData = await giveMeProfileInfo(props.uid);
-
                                     setProfile(retrievedData);
                                 }
             useEffect(() => {
 
+                if(profileList != null) {
+                  getProfile();
+                getImage(props.uid, setPostImg);  
+                }
                 
-                getProfile();
-                getImage(props.uid, setPostImg);
                 
-            }, [])
+            }, [profileList])
            
     return (
 
