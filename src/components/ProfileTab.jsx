@@ -27,7 +27,7 @@ function ProfileTab() {
         
         getProfile();
         
-    }, [realTimeProfiles])
+    }, [realTimeProfiles, loggedInUserId])
 
 
     return (

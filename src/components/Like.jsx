@@ -1,13 +1,14 @@
 import React from "react";  
 import { useState, useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
+import { LogInContext } from "../contexts/LogInContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFireFlameSimple } from "@fortawesome/free-solid-svg-icons";
 
 function Like(props) {
 
     const {updatePost} = useContext(HomeContext)
-    
+    const {loggedInUserId} = useContext(LogInContext);
     const [likeAmmount, setLikeAmmount] = useState(null);
     const [liked, setLiked] = useState(null);
     const [textColor, setTextColor] = useState("white");
@@ -24,7 +25,7 @@ function Like(props) {
                 <h1 className="mr-2">{likeAmmount}</h1>
                 <button className="text-2xl hover:text-4xl" 
                  onClick={() => {
-                    if (!liked) {
+                    if (!liked && loggedInUserId != null) {
                         setLikeAmmount((prevLikeAmount) => {
                           const updatedLikeAmount = prevLikeAmount + 1;
                           updatePost(props.postId, "Likes", updatedLikeAmount);
@@ -32,7 +33,7 @@ function Like(props) {
                           return updatedLikeAmount;
                         });
                         setLiked(true);
-                      } else if (liked) {
+                      } else if (liked && loggedInUserId != null) {
                         setLikeAmmount((prevLikeAmount) => {
                           const updatedLikeAmount = prevLikeAmount - 1;
                           updatePost(props.postId, "Likes", updatedLikeAmount);
