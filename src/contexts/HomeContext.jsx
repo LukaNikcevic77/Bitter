@@ -28,6 +28,8 @@ export const HomeContextProvider = (props) => {
         return a.replace(/^"(.*)"$/, '$1');
     }
 
+    
+
     const getProfiles = async() => {
         try{
             const profiles = await getDocs(profileListRef);
@@ -98,6 +100,8 @@ export const HomeContextProvider = (props) => {
               }
         }
 
+        
+
         useEffect(() => {
 
           onSnapshot(profileListRef, (snapshot) => {
@@ -106,6 +110,7 @@ export const HomeContextProvider = (props) => {
               clayPiggeonArray.push({...doc.data(), profileId: doc.id})
             });
             setRealTimeProfiles(clayPiggeonArray);
+            
             
           })
 

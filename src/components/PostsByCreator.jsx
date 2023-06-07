@@ -17,7 +17,8 @@ function PostsByCreator(props){
 
     return (
         <>
-            {postList
+            {postList != null && 
+            <>{postList
             .filter((post) => 
                 {
                     return post.CreatedBy === targetedUser;
@@ -31,6 +32,7 @@ function PostsByCreator(props){
                 return <Post size={"small"} uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId} key={post.postId}/>}
                 
             )}
+            </>}
         </>
     )
 

@@ -17,8 +17,9 @@ function ProfileShowcase(){
     const [amFollowing, setAmFollowing] = useState(false);
 
     const getProfile = async() => {
-        if(profileToShowCase != null){
 
+        if(profileToShowCase != null){
+        
         let currUSer = realTimeProfiles.find((profile) => profile.userId === loggedInUserId);
         let showcaseingUser = realTimeProfiles.find((profile) => profile.userId === profileToShowCase);
 
@@ -29,11 +30,14 @@ function ProfileShowcase(){
         
         }
         
+        
     }
+
+    useEffect(() => {console.log(profileToShowCase)}, [profileToShowCase])
 
     useEffect(() => {
         getProfile();
-      
+        
         if (profile !== null && profile.followers) {
           const set = new Set(profile.followers);
           const doesFollow = set.has(loggedInUserId);

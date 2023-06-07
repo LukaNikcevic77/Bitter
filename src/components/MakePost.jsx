@@ -35,7 +35,7 @@ function MakePost(props){
         <>
             {loggedInUserId != null && 
             <>
-                    <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-10 rounded-lg">
+                    <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-10 -mb-10 rounded-lg">
                 <span className="grid grid-cols-[2fr,12fr]">
                     <img className="w-50 h-50 rounded-full ml-4 mt-4" src={userProfileImage} alt="Image" />
                 <span className="col-span-1 flex flex-col items-start">
