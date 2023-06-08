@@ -8,7 +8,6 @@ function ProfileTab() {
     const {loggedInUserId} = useContext(LogInContext);
     const {getImage, realTimeProfiles} = useContext(HomeContext);
     const [postImage, setPostImage] = useState(null);    
-    const[loggedUserImage, setLoggedUserImage] = useState(null);
     
     const [profile, setProfile] = useState(null);
 

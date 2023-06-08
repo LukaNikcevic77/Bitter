@@ -1,12 +1,7 @@
 import React from "react";  
-import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useContext } from "react";
 import {auth} from "../firebase/firebase";
-import { storage } from "../firebase/firebase";
-import { db } from "../firebase/firebase";
-import { ref, getDownloadURL } from "firebase/storage";
 import {signOut } from "firebase/auth";
-import {getDocs, collection, orderBy} from "firebase/firestore";
 import { LogInContext } from "../contexts/LogInContext";
 import { HomeContext } from "../contexts/HomeContext";
 import ProfileTab from "./ProfileTab";
@@ -18,7 +13,7 @@ function Home() {
    
     const {getPosts, postsLoaded, showcaseOn} = useContext(HomeContext);
 
-    const {typeOfLogin, setLoggedInUSerId} = useContext(LogInContext);
+    const {setLoggedInUSerId} = useContext(LogInContext);
    
     
     

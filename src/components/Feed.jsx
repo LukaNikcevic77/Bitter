@@ -1,14 +1,12 @@
 import React from "react";  
 import { useState, useEffect, useContext } from "react";
-import {auth} from "../firebase/firebase";
 import { HomeContext } from "../contexts/HomeContext";
 import Post from "./Post";
 import MakePost from "./MakePost";
 
 function Feed(props){
     
-    const {getImage, url, postList, profileList, setProfileToShowCast, setShowcaseOn} = useContext(HomeContext);
-    const [postImage, setPostImage] = useState(null);    
+    const {postList, profileList, setProfileToShowCast, setShowcaseOn} = useContext(HomeContext);
 
     const [searchValue, setSearchValue] = useState("");
     useEffect(() => {
@@ -32,7 +30,6 @@ function Feed(props){
                 .filter((profile) => {
                     const searchProfile = searchValue.toLowerCase();
                     const usertag = profile.tag.toLowerCase();
-                    console.log(usertag.startsWith(searchProfile));
                     if(searchProfile != "" && usertag.startsWith(searchProfile)){
                         return profile;
                     }
@@ -52,7 +49,7 @@ function Feed(props){
             {postList.map((post) => {
                 
                 
-                return <Post size={"big"} uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId} key={post.postId}/>}
+                return <Post uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId} key={post.postId}/>}
                 
             )}
         </>

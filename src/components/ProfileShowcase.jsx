@@ -8,12 +8,10 @@ function ProfileShowcase(){
 
     const {loggedInUserId} = useContext(LogInContext);
     
-    const {getImage,giveMeProfileInfo, profileToShowCase, follow, profileToShowCaseObject, realTimeProfiles} = useContext(HomeContext);
+    const {getImage, profileToShowCase, follow, profileToShowCaseObject, realTimeProfiles} = useContext(HomeContext);
     const [postImage, setPostImage] = useState(null);  
     const [profile, setProfile] = useState(null);
     const [currUser, setCurrUser] = useState(null);
-
-    const [postImg, setPostImg] = useState(null);
     const [amFollowing, setAmFollowing] = useState(false);
 
     const getProfile = async() => {
@@ -33,7 +31,6 @@ function ProfileShowcase(){
         
     }
 
-    useEffect(() => {console.log(profileToShowCase)}, [profileToShowCase])
 
     useEffect(() => {
         getProfile();
@@ -91,7 +88,6 @@ function ProfileShowcase(){
             {amFollowing && <>
                 <button className="w-full -ml-5 py-5 mt-5 rounded-full bg-blue-300 hover:bg-blue-500"
                onClick={() => {
-                console.log(profile);
                 follow(profile, currUser, "unfollow");  setProfile(profileToShowCaseObject);
                 }}>Unfollow</button>
             </>}

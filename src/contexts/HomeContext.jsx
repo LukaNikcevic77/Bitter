@@ -1,7 +1,7 @@
 import React from "react";
-import {useContext, useState, useEffect, createContext} from "react";
+import {useState, useEffect, createContext} from "react";
 import { db, storage } from "../firebase/firebase";
-import {getDocs, collection, orderBy, updateDoc, doc, getDoc, onSnapshot,  addDoc, serverTimestamp, arrayUnion, arrayRemove} from "firebase/firestore";
+import {getDocs, collection, updateDoc, doc, getDoc, onSnapshot,  addDoc, serverTimestamp, arrayUnion, arrayRemove} from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
 export const HomeContext = createContext(null);
@@ -40,11 +40,9 @@ export const HomeContextProvider = (props) => {
            
             
         } catch(err) {
-          alert(err);
         }
           }
           const updatePost =  (postId, fieldToUpdate, value) => {
-            console.log({postId, fieldToUpdate, value});
             const postRef = doc(db, "Posts", postId);
              updateDoc(postRef, {
               [fieldToUpdate]: value
@@ -126,14 +124,11 @@ export const HomeContextProvider = (props) => {
             
             if (docSnapshot.exists()) {
               const documentData = docSnapshot.data();
-              console.log("It passed!");
               setProfileToShowCaseObject(documentData);
             } else {
 
-              console.log("Document does not exist");
             }
           } catch (error) {
-            console.log("Error getting document:", error);
           }
         }
         const addPost = async(userId, content, updateDom) => {
@@ -175,7 +170,6 @@ export const HomeContextProvider = (props) => {
             setPostsLoaded(true);
             
         } catch(err) {
-          alert(err);
         }
           }
           

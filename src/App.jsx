@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState, useContext, useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import WelcomeScreen from './components/WelcomeScreen'
 import Home from './components/Home'

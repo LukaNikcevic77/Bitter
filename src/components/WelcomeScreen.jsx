@@ -5,7 +5,6 @@ import { db } from "../firebase/firebase";
 import { LogInContext } from "../contexts/LogInContext";
 import {auth, googleProvider} from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
-
 import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 
@@ -25,7 +24,7 @@ function WelcomeScreen(){
     
 
 
-    const {loggedIn, setLoggedIn, setLoggedInUSerId} = useContext(LogInContext);
+    const {loggedIn, setLoggedInUSerId} = useContext(LogInContext);
     
     const [wrongPassword, setWrongPassword] = useState(false);
     const [email, setEmail] = useState('');
@@ -54,7 +53,6 @@ function WelcomeScreen(){
        youAreWelcome("/Home");
 
       } catch (err) {
-        console.log(err);
       }
 
     }
@@ -82,9 +80,7 @@ function WelcomeScreen(){
         const filteredProfiles = profiles.docs.map((user) => ({...user.data(), id: user.id}))
         
         if(filteredProfiles.map((userL) => {
-          console.log(userL.userId);
-          console.log(auth.currentUser.uid);
-          console.log(userL.userId == auth.currentUser.uid);
+
             if(userL.userId == auth.currentUser.uid){
               return true;
             }
@@ -99,7 +95,6 @@ function WelcomeScreen(){
 
     }
 
-    useEffect(() => {console.log(typeOfLogin)}, []);
     
 
     if(!loggedIn){

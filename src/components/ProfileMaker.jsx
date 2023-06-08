@@ -1,5 +1,5 @@
 import React from "react";  
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import {auth} from "../firebase/firebase";
 import { db } from "../firebase/firebase";
@@ -27,7 +27,6 @@ function ProfileMaker(){
                   const profiles = await getDocs(profileListRef);
                   const filteredProfiles = profiles.docs.map((user) => ({...user.data(), id: user.id}))
                   setProfileList(filteredProfiles)
-                  console.log(filteredProfiles);
               } catch(err) {
                 alert(err);
               }
@@ -59,7 +58,6 @@ function ProfileMaker(){
                     }
                 })
 
-                console.log(isTagUsed);
                 if(!isTagUsed && !isUserNameUsed && userImage != null){
                   const profileImageRef = ref(storage, `profileImages/${auth.currentUser.uid}`)
                 uploadBytes(profileImageRef, userImage);
@@ -69,7 +67,6 @@ function ProfileMaker(){
                     userName: userName,
                     userId: auth.currentUser.uid
                 });
-                console.log("Idi dalje");
                 youAreWelcome();
                 }
                 if(isTagUsed == true){

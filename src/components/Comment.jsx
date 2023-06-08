@@ -1,13 +1,11 @@
 import React from "react";  
-import { useState, useEffect, useContext } from "react";
-import { HomeContext } from "../contexts/HomeContext";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDollar } from "@fortawesome/free-solid-svg-icons";
 import MakeComment from "./MakeComment";
 import OldComments from "./OldComments";
 function Comment(props) {
 
-    const {giveMeProfileInfo, getImage, url, removeQuotes} = useContext(HomeContext);
     
    
     const [commentAmmount, setCommentAmmount] = useState([]);

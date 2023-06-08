@@ -14,7 +14,7 @@ function Like(props) {
     const [textColor, setTextColor] = useState("white");
            
     useEffect(() => {
-        console.log(props.likes);
+        
         setLiked(false);
         setLikeAmmount(props.likes);
     }, [props.likes])

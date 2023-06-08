@@ -1,12 +1,11 @@
 import React from "react";  
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { HomeContext } from "../contexts/HomeContext";
 import Post from "./Post";
 
 function PostsByCreator(props){
     
-    const {getImage, url, postList} = useContext(HomeContext);
-    const [postImage, setPostImage] = useState(null);  
+    const {postList} = useContext(HomeContext);
     const {targetedUser}  = props;
     useEffect(() => {
         
@@ -29,7 +28,7 @@ function PostsByCreator(props){
             .map((post) => {
                 
                 
-                return <Post size={"small"} uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId} key={post.postId}/>}
+                return <Post uid={post.CreatedBy} content = {post.Content} comments={post.Comments} likes={post.Likes} makingTime={post.CreatedTime} postId = {post.postId} key={post.postId}/>}
                 
             )}
             </>}

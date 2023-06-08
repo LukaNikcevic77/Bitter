@@ -6,26 +6,20 @@ import { LogInContext } from "../contexts/LogInContext";
 
 function MakeComment(props){
 
-    const {loggedInUserId, canPost} = useContext(LogInContext);
+    const {loggedInUserId} = useContext(LogInContext);
     const {postId} = props;
 
     const [profile, setProfile] = useState(null);
-    const {addComment, giveMeProfileInfo, getImage, url, canComment} = useContext(HomeContext);
+    const {addComment, giveMeProfileInfo, getImage, canComment} = useContext(HomeContext);
     const [postContent, setPostContent] = useState("");
     const [postImage, setPostImage] = useState(null);    
-    function stringifyObjectWithSingleQuotes(obj) {
-        const str = JSON.stringify(obj, null, 4);
-        return str.replace(/"([^"]+)":/g, "'$1':");
-      }
+    
 
     const makeObjectForArray = () => {
 
         const obj = `{uid: ${loggedInUserId}, content: "${postContent}", likes: 0}`;
             
         
-           
-
-        console.log(obj);
         
         addComment(postId, obj);
     }

@@ -19,7 +19,6 @@ function OldComments(props) {
 
                 getImage(comment.uid, setPostImage)
                 getProfile(comment.uid);
-                console.log(postImage, profile);
     }, [])
 
     return (
