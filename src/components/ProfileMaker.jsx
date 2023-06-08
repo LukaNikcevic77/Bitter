@@ -65,7 +65,9 @@ function ProfileMaker(){
                     bio: userBio,
                     tag: userAt,
                     userName: userName,
-                    userId: auth.currentUser.uid
+                    userId: auth.currentUser.uid,
+                    followers: [],
+                    following: []
                 });
                 youAreWelcome();
                 }
