@@ -1,0 +1,84 @@
+
+$darkest: #303841;
+$lighter: #3A4750;
+$logo: #fdd73c;
+$contrast: #EEEEEE;
+
+* {
+    padding: 0px;
+    margin: 0px;
+
+    
+  }
+  html {
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+
+    .largeText {
+        font-size: 3vw;
+    }
+
+    .mediumText {
+        font-size: 2vw;
+    }
+    .smallText {
+        font-size: 1vw;
+    }
+
+        .logo {
+                color: $logo;
+                margin-right: 1vw;
+                margin-left: 2vw;
+        }
+
+    .navbar{
+        display: flex;
+        align-items: center;
+        background-color: $lighter;
+        min-width: 100vw;
+        min-height: 15vh;
+        color: $contrast;
+        
+        
+    }
+
+    .profileMaker{
+        min-height: 100vh;
+        min-width: 100vw;
+        background-color: $darkest;
+    }
+    .welcomeScreen {
+        min-height: 100vh;
+        min-width: 100vw;
+        overflow: hidden;
+        margin-bottom: -10vw;
+        padding-top: 10vw;
+        background-color: $darkest;
+
+        .welcomeForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 2vw;
+            border: $contrast;
+            max-height: 35vh;
+            max-width: 40%;
+            margin: 0 auto;
+            padding: 5vw 2vw;
+            padding-top: 1.5vw;
+            overflow: hidden;
+            background-color: black;
+            color: $contrast;
+            text-align: center;
+            
+            .nameSpan {
+                text-align: start;
+                display: flex;
+                flex-direction: row;
+                align-items: start;
+
+            }
+        }
+    }
+  }

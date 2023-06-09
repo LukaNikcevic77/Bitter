@@ -6,7 +6,8 @@ import { LogInContext } from "../contexts/LogInContext";
 import {auth, googleProvider} from "../firebase/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword, signOut } from "firebase/auth";
-
+import { faLemon } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function WelcomeScreen(){
   const [typeOfLogin, setTypeOfLogin] = useState("");
@@ -101,15 +102,19 @@ function WelcomeScreen(){
             return (
             <>
               
-              <div className="bg-black text-2xl w-screen h-screen overflow-hidden -mb-10 pt-10">
-                <div className="bg-gray-800 opacity-100 text-white flex flex-col items-center m-auto w-2/5 h-2/3 mt-16 py-14 rounded-3xl border-white overflow-hidden">
+              <div className="welcomeScreen mediumText">
+                <div className="welcomeForm mediumText">
                   {typeOfLogin === "" && (
                     <>
-                      <p className="text-center">
-                        Welcome to our app where <br /> you can chase all the clout you
-                        want!
+                    <span className="nameSpan">
+                      <p className="largeText">
+                      <FontAwesomeIcon
+                      icon={faLemon}
+                      className="logo mediumText"
+                    />
+                    Bitter
                       </p>
-          
+                    </span>
                         <button
                           className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-10 px-32 py-5"
                           onClick={() => {

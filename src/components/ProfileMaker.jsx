@@ -101,7 +101,7 @@ function ProfileMaker(){
 
     return (
         <>
-            <div className="bg-black text-base w-screen h-screen overflow-hidden -mb-10 pt-10">
+            <div className="profileMaker">
                 <div className="bg-gray-800 opacity-100 text-white flex flex-col items-center m-auto w-2/5 h-2/3 mt-16 py-14 rounded-3xl border-white overflow-hidden">
                 <label htmlFor="Image">Add your profile image:</label>
                 <input type="file" name="Image" id="" alt="Add image" accept="image/png, image/jpeg" className="text-white py-8 -mt-4" 

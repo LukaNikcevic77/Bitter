@@ -1,3 +1,4 @@
+import './style/style.scss'
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import WelcomeScreen from './components/WelcomeScreen'
@@ -6,8 +7,7 @@ import { LogInContextProvider } from './contexts/LogInContext'
 import { HomeContextProvider } from './contexts/HomeContext'
 import ProfileMaker from './components/ProfileMaker'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCertificate } from "@fortawesome/free-solid-svg-icons";
-
+import { faLemon } from "@fortawesome/free-solid-svg-icons";
 function App() {  
  
   return (
@@ -16,14 +16,14 @@ function App() {
     <LogInContextProvider>
     <HomeContextProvider>
       <BrowserRouter>
-      <div className="bg-black text-2xl w-screen h-20 overflow-hidden fixed">
-                <div className="bg-black">
-                  <p className="text-white flex flex-row items-start pt-6 pl-10">
+      <div className="navbar mediumText">
+                <div className="">
+                  <p className="">
                     <FontAwesomeIcon
-                      icon={faCertificate}
-                      className="text-yellow-300 mr-2 text-2xl pt-1"
+                      icon={faLemon}
+                      className="logo"
                     />
-                    Clout
+                    Bitter
                   </p>
                 </div>
               </div>
