@@ -41,25 +41,27 @@ function Post(props) {
         
         <>
         
-             <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-12 rounded-lg hover:cursor-pointer"
+             <div className="postHolder"
                 onClick={() => {setProfileToShowCast(props.uid); setShowcaseOn(true); giveMeInfoForProfileDisplay(props.uid)}}>
-                <span className="grid grid-cols-[2fr,12fr]">
-                    <img className="ml-4 mt-4" src={postImg} alt="Image" style={{height: '2vw', width: '2vw', borderRadius: '50%'}}/>
-                <span className="col-span-1 flex flex-col items-start">
-                    <span className="flex flex-row items-center bg-blue-300 mt-4">
+                <span className="gridPostContainer">
+                    <img className="mediumImage" src={postImg} alt="Image" />
+                <span className="postDetailsContainer">
+                    <span className="postNameAndTime">
 
                         {profile != null &&
                          <>
-                         <h1 className="font-bold mr-2 text-xl">{profile.userName}</h1>
-                         <h1 className="mr-2">@{profile.tag}</h1>
-                         <h1 className="mr-2 mb-1">|</h1>
-                         <p className="text-lg mr-2">{month} {day}</p>
-                         <p>{postHours} : {postMinutes}</p>
+                         <h1 className="smallText">{profile.userName}</h1>
+                         <h1 className="smallText">@{profile.tag}</h1>
+                         <h1 className="smallText" style={{marginRight: '2vw', marginBottom: '1vw'}}>|</h1>
+                         <span style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                         <p className="smallText">{month} {day}</p>
+                         <p >{postHours} : {postMinutes}</p>
+                         </span>
                          </>}
 
                     </span>
 
-                    <span className="row-span-1 col-span-1">
+                    <span className="postContent smallText">
                     <h1>{props.content}</h1>
                     </span>
                  </span>

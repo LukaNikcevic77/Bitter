@@ -15,6 +15,24 @@ $contrast: #EEEEEE;
     margin: 0px;
     overflow: hidden;
 
+    .bigImage {
+        height: 5vw;
+        width: 5vw;
+        border-radius: 50%;
+        margin-left: 1vw;
+        margin-top: 1vw;
+        margin-right: 0.7vw;
+    }
+
+    .mediumImage {
+        height: 2.5vw;
+        width: 2.5vw;
+        border-radius: 50%;
+        margin-left: 1vw;
+        margin-top: 1vw;
+        margin-right: 0.7vw;
+    }
+
     .mistake {
         color: rgb(255, 60, 60);
     }
@@ -120,6 +138,126 @@ $contrast: #EEEEEE;
             }
         }
     }
+
+    .home {
+        display: flex;
+        max-height: 100vh;
+        max-width: 100vw;
+        overflow: hidden;
+        margin-bottom: -10vw;
+        padding-top: 1vw;
+        background-color: $darkest;
+
+        .firstThird{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            overflow-y: auto;
+            width: 30%;
+            padding-top: 5vw;
+            padding-left: 1.6vw;
+            padding-bottom: 15vw;
+
+        }
+
+        .secondThird{
+            width: 50%;
+            background-color: #3b82f6;
+            overflow-y: auto;
+        }
+
+        .lastThird {
+            width: 30%;
+            background-color: #34d399;
+            margin-top: 1vw;
+            overflow-y: auto;
+        }
+
+        .makePost {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: auto;
+            width: 90%;
+            background-color: #6b7280;
+            color: #fff;
+            margin-top: 1vw;
+            margin-bottom: -1vw;
+            margin-left: 2vw;
+            border-radius: 2vw;
+            padding-bottom: 2vw;
+            .postGrid{
+                display: grid;
+                grid-template-columns: 2fr 12fr;
+            }
+
+            .firstSpan{
+                display: flex;
+                flex-direction: column;
+                grid-column: span 1;
+                align-items: flex-start;
+                padding-top: 0.6vw;
+            }
+
+            .namingSpan{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                background-color: #90cdf4;
+                margin-top: 0.4vw;
+            }
+
+            .inputContainer {
+                grid-row: span 1;
+                grid-column: span 1;
+                margin-bottom: -1vw;
+                
+            }
+        }
+        .postHolder{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: auto;
+            width: 70%;
+            background-color: #6b7280;
+            color: #fff;
+            margin-top: 2vw;
+            margin-bottom: -1.2vw;
+            border-radius: 0.5rem;
+            cursor: pointer;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            .gridPostContainer {
+                display: grid;
+                grid-template-columns: 2fr 12fr;
+            }
+
+            .postDetailsContainer {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                grid-column: span 1;
+
+                .postNameAndTime {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    background-color: #90cdf4;
+                    margin-top: 0.4vw;
+                }
+
+                .postContent {
+                    grid-row: span 1;
+                    grid-column: span 1;
+                }
+            }
+        }
+    }
+    
 
 
     //BUttons: 

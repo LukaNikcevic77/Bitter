@@ -33,19 +33,19 @@ function Home() {
     return (
         <>
         
-        <div className="bg-black bg-opacity-90 text-base w-screen h-screen overflow-hidden -mb-20 pt-10 flex">
-        <div className="w-1/4 pt-32 pl-16 pb-56 flex flex-col items-start text-4xl overflow-y-auto">
+        <div className="home mediumText">
+        <div className="firstThird">
             <button 
-        className="mt-10 px-10 py-5 rounded-3xl bg-opacity-0  text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none"
+        className="btn-1 mediumText"
        onClick={() => getPosts()} >Explore</button>
-            <button className="mt-10 px-10 py-5 rounded-3xl bg-opacity-0  text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none"
+            <button className="btn-1 mediumText"
            onClick={async() => {await signOut(auth); setLoggedInUSerId(null)}} >Log out</button>
             {showcaseOn && <>
                     <ProfileShowcase />
             </>}
         </div>
-        <div className="w-1/2 bg-blue-600 overflow-y-auto">{postsLoaded &&  <Feed/>}</div>
-        <div className="w-1/4 bg-green-600 mt-10 overflow-y-auto"><ProfileTab /></div>
+        <div className="secondThird">{postsLoaded &&  <Feed/>}</div>
+        <div className="lastThird"><ProfileTab /></div>
         </div>
 
         </>

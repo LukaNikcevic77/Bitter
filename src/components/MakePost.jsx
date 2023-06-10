@@ -35,29 +35,29 @@ function MakePost(props){
         <>
             {loggedInUserId != null && 
             <>
-                    <div className="h-auto w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-10 -mb-10 rounded-lg">
-                <span className="grid grid-cols-[2fr,12fr]">
-                    <img className="w-50 h-50 rounded-full ml-4 mt-4" src={userProfileImage} alt="Image" />
-                <span className="col-span-1 flex flex-col items-start">
-                    <span className="flex flex-row items-center bg-blue-300 mt-4">
+                    <div className="makePost">
+                <span className="postGrid">
+                    <img className="bigImage" src={userProfileImage} alt="Image" />
+                <span className="firstSpan">
+                    <span className="namingSpan">
 
                         {profile != null &&
                          <>
-                         <h1 className="font-bold mr-2 text-xl">{profile.userName}</h1>
-                         <h1 className="mr-2">@{profile.tag}</h1>
+                         <h1 className="mediumText">{profile.userName}</h1>
+                         <h1 className="smallText">@{profile.tag}</h1>
                          </>}
 
                     </span>
 
-                    <span className="row-span-1 col-span-1">
+                    <span className="inputContainer">
                     <textarea name="" id="" cols="40" rows="5" placeholder="What's on your mind?"
-                     className="rounded-xl bg-slate-700 text-white border-none focus:outline-none outline-none:disabled pt-5 pl-5 pr-2" 
+                     className="input-1 smallText" 
                      style={{resize: "none"}}
                      onChange={(e) => setPostContent(e.target.value)}
                      value={postContent}></textarea>
                     </span>
                     <button disabled={canPost}
-                     className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-10 py-5"
+                     className="btn-1 smallText"
                      onClick={() => { addPost(loggedInUserId, postContent, getPosts); setPostContent("")}}>Throw it out!</button>
                  </span>
                 </span>
