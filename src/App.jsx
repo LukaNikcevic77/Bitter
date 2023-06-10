@@ -21,10 +21,11 @@ function App() {
                   <p className="">
                     <FontAwesomeIcon
                       icon={faLemon}
-                      className="logo"
+                      className="logo mediumText"
                     />
-                    Bitter
+                   
                   </p>
+                  <p className='largeText'>Bitter </p> 
                 </div>
               </div>
         <Routes>

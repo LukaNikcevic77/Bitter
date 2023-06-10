@@ -112,11 +112,12 @@ function WelcomeScreen(){
                       icon={faLemon}
                       className="logo mediumText"
                     />
-                    Bitter
-                      </p>
+                   
+                      </p> 
+                      <p className="largeText title">Bitter</p>
                     </span>
                         <button
-                          className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-10 px-32 py-5"
+                          className="btn-1 mediumText"
                           onClick={() => {
                             setTypeOfLogin("google");
                             signInGoogle();
@@ -125,20 +126,20 @@ function WelcomeScreen(){
                           Sign in with Google
                         </button>
                         <button
-                          className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-44 py-5"
+                          className="btn-1 mediumText"
                           onClick={() => setTypeOfLogin("mail")}
                         >
                           Sign up
                         </button>
                         <button
-                          className="rounded-3xl bg-gray-500 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-44 py-5"
+                          className="btn-1 mediumText"
                           onClick={() => setTypeOfLogin("mailLogin")}
                         >
                           Sign in
                         </button>
                         
                         <button
-                          className="rounded-3xl bg-white text-base text-black hover:bg-gray-500 hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-44 py-5"
+                          className="btn-2 mediumText"
                           onClick={() => anonymous()}
                         >
                           Continue as Anonymous
@@ -149,7 +150,7 @@ function WelcomeScreen(){
           
                   {typeOfLogin === "mail" && (
                     <>
-                      <label htmlFor="emailInput" className="mt-10">
+                      <label htmlFor="emailInput" className="largeText">
                         Email:
                       </label>
                       <input
@@ -157,10 +158,10 @@ function WelcomeScreen(){
                         name="emailInput"
                         id="emailInput"
                         placeholder="Email..."
-                        className="mt-4 text-black"
+                        className="input-1 mediumText"
                         onChange={(e) => setEmail(e.target.value)}
                       />
-                      <label htmlFor="passwordInput" className="mt-10">
+                      <label htmlFor="passwordInput" className="largeText">
                         Password
                       </label>
                       <input
@@ -168,19 +169,19 @@ function WelcomeScreen(){
                         name=""
                         id="passwordInput"
                         placeholder="Password..."
-                        className="mt-4 text-black"
+                        className="input-1 mediumText"
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                      {wrongPassword && (<p className="mt-4 text-red-700">Email is allready in use!</p>)}
+                      {wrongPassword && (<p className="mistake">Email is allready in use!</p>)}
                       
                       <button
-                        className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-10 py-5"
+                        className="btn-1 mediumText"
                         onClick={() => signUpMail()}
                       >
                         Start the chase!
                       </button>
                       <button
-                        className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-10 py-5"
+                        className="btn-2 smallText"
                         onClick={() => {
                           setTypeOfLogin("");
                           setEmail("");
@@ -193,7 +194,7 @@ function WelcomeScreen(){
                   )}
                   {typeOfLogin === "mailLogin" && (
                     <>
-                      <label htmlFor="emailInput" className="mt-10">
+                      <label htmlFor="emailInput" className="largeText">
                         Email:
                       </label>
                       <input
@@ -201,10 +202,10 @@ function WelcomeScreen(){
                         name="emailInput"
                         id="emailInput"
                         placeholder="Email..."
-                        className="mt-4 text-black"
+                        className="input-1 mediumText"
                         onChange={(e) => setEmail(e.target.value)}
                       />
-                      <label htmlFor="passwordInput" className="mt-10">
+                      <label htmlFor="passwordInput" className="largeText">
                         Password
                       </label>
                       <input
@@ -212,19 +213,19 @@ function WelcomeScreen(){
                         name=""
                         id="passwordInput"
                         placeholder="Password..."
-                        className="mt-4 text-black"
+                        className="input-1 mediumText"
                         onChange={(e) => setPassword(e.target.value)}
                       />
-                      {wrongPassword && (<p className="mt-4 text-red-700">Wrong password!</p>)}
+                      {wrongPassword && (<p className="mistake">Wrong password!</p>)}
                       
                       <button
-                        className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-10 py-5"
+                        className="btn-1 mediumText"
                         onClick={() => signInMail()}
                       >
                         Start the chase!
                       </button>
                       <button
-                        className="rounded-3xl bg-gray-700 text-2xl text-white  hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-5 px-10 py-5"
+                        className="btn-2 smallText"
                         onClick={() => {
                           setTypeOfLogin("");
                           setEmail("");

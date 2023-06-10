@@ -15,6 +15,9 @@ $contrast: #EEEEEE;
     margin: 0px;
     overflow: hidden;
 
+    .mistake {
+        color: rgb(255, 60, 60);
+    }
     .largeText {
         font-size: 3vw;
     }
@@ -34,11 +37,19 @@ $contrast: #EEEEEE;
 
     .navbar{
         display: flex;
+        
         align-items: center;
         background-color: $lighter;
         min-width: 100vw;
         min-height: 15vh;
         color: $contrast;
+
+        div {
+            display: flex;
+            flex-direction: row;
+            padding: 1vw 0vw;
+            align-items: center;
+        }
         
         
     }
@@ -47,23 +58,46 @@ $contrast: #EEEEEE;
         min-height: 100vh;
         min-width: 100vw;
         background-color: $darkest;
+        padding-top: 2vw;
+        .profileMakerForm {
+            background-color: black;
+            color: $contrast;
+            display: flex;
+            flex-direction: column;
+            gap: .3vw;
+            align-items: center;
+            margin: auto;
+            width: 40vw;
+            height: 60vh;
+            padding-top: 2vw;
+            border-radius: .5vw;
+            border: .5vw solid $contrast;
+            overflow: hidden;
+            overflow-y: scroll;
+            padding-bottom: 2vw;
+
+            .fileInput {
+                min-height: 3vw;
+            }
+        }
     }
     .welcomeScreen {
         min-height: 100vh;
         min-width: 100vw;
         overflow: hidden;
         margin-bottom: -10vw;
-        padding-top: 10vw;
+        padding-top: 3vw;
         background-color: $darkest;
 
+    
         .welcomeForm {
             display: flex;
             flex-direction: column;
             align-items: center;
             border-radius: 2vw;
             border: $contrast;
-            max-height: 35vh;
-            max-width: 40%;
+            max-height: 60vh;
+            max-width: 30vw;
             margin: 0 auto;
             padding: 5vw 2vw;
             padding-top: 1.5vw;
@@ -77,8 +111,71 @@ $contrast: #EEEEEE;
                 display: flex;
                 flex-direction: row;
                 align-items: start;
-
+                margin-left: -3vw;
+                margin-bottom: 1vw;
+            }
+            .title{
+                margin-top: 0.3vw;
+                margin-left: -0.7vw;
             }
         }
     }
+
+
+    //BUttons: 
+    .btn-1 {
+        border-radius: 1vw;
+        background-color: $darkest;
+        color: $contrast;
+        margin-top: 1vw;
+        padding: 1vw 2vw;
+        border: .2vw solid $contrast;
+
+        &:hover {
+            background-color: $contrast;
+            color: $lighter;
+            border-color: $lighter;
+            border-style: solid;
+            cursor: pointer;
+        }
+      }
+
+      .btn-2 {
+        border-radius: 1vw;
+        background-color: $contrast;
+        color: $darkest;
+        margin-top: 1vw;
+        padding: 1vw 2vw;
+        border: .2vw solid $darkest;
+
+        &:hover {
+            background-color: $darkest;
+        color: $contrast;
+        border-color: $lighter;
+        border-style: solid;
+        cursor: pointer;
+        }
+      }
+      
+
+      .input-1 {
+            border-radius: 1vw;
+            background-color: $darkest;
+            color: $contrast;
+            margin-top: 1vw;
+            padding: 1vw 2vw;
+            border: .2vw solid $contrast;
+            margin-bottom: 1vw;
+            resize: none;
+            &:focus {
+                outline: none;
+            }
+          
+      }
+
+      
+
+
+      
+      
   }

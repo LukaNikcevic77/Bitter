@@ -102,19 +102,20 @@ function ProfileMaker(){
     return (
         <>
             <div className="profileMaker">
-                <div className="bg-gray-800 opacity-100 text-white flex flex-col items-center m-auto w-2/5 h-2/3 mt-16 py-14 rounded-3xl border-white overflow-hidden">
-                <label htmlFor="Image">Add your profile image:</label>
-                <input type="file" name="Image" id="" alt="Add image" accept="image/png, image/jpeg" className="text-white py-8 -mt-4" 
+                <div className="profileMakerForm">
+                <label htmlFor="Image" className=" smallText">Add your profile image</label>
+                <input type="file" name="Image" id="" alt="Add image" accept="image/png, image/jpeg" className="fileInput smallText" 
                 onChange={(e) => {setUserImage(e.target.files[0])}}/>
-                <label htmlFor="At" className="">Add your at:</label>
-                <input type="text" name="At" id=""  maxLength={20} className="text-black" onChange={(e) => setUserAt(e.target.value)}/>
-                {tagUsed && (<p className="text-red-700">At is allready used!</p>)}
-                <label htmlFor="UserName">Add your username:</label>
-                <input type="text" name="UserName" id="" maxLength={30} className="text-black" onChange={(e) => setUserName(e.target.value)}/>
-                {userNameUsed && (<p className="text-red-700">User name is allready used!</p>)}
-                <label htmlFor="Bio">Your bio down here:</label>
-                <textarea name="Bio" id="" cols="30" rows="4" className="text-black" onChange={(e) => setUserBio(e.target.value)}></textarea>
-                <button className="rounded-3xl bg-gray-700 text-base text-white hover:bg-white hover:text-black hover:border hover:border-5 hover:border-none mt-4 px-32 py-5" 
+               
+                <label htmlFor="At" className="mediumText">Add your at:</label>
+                <input type="text" name="At" id=""  maxLength={20} className="input-1 smallText" onChange={(e) => setUserAt(e.target.value)}/>
+                {tagUsed && (<p className="mistake">At is allready used!</p>)}
+                <label htmlFor="UserName" className="mediumText">Add your username:</label>
+                <input type="text" name="UserName" id="" maxLength={30} className="input-1 smallText" onChange={(e) => setUserName(e.target.value)}/>
+                {userNameUsed && (<p className="mistake">User name is allready used!</p>)}
+                <label htmlFor="Bio" className="mediumText">Your bio down here:</label>
+                <textarea name="Bio" id="" cols="30" rows="4" className="input-1 smallText" onChange={(e) => setUserBio(e.target.value)}></textarea>
+                <button className="btn-2 smallText" 
                 onClick={() => verifyInput()}>Come in!</button>
                 </div>
 
