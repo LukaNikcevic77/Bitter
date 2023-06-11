@@ -50,19 +50,22 @@ function Post(props) {
 
                         {profile != null &&
                          <>
-                         <h1 className="smallText">{profile.userName}</h1>
-                         <h1 className="smallText">@{profile.tag}</h1>
-                         <h1 className="smallText" style={{marginRight: '2vw', marginBottom: '1vw'}}>|</h1>
+                         <h1 className="smallText bold">{profile.userName} </h1>
+                         <h1 className="smallText normal" style={{marginLeft: '1%'}}>@{profile.tag}</h1>
+                         <h1 className="smallText normal" style={{marginRight: '1%',marginLeft: '1%'}}>|</h1>
                          <span style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                         <p className="smallText">{month} {day}</p>
-                         <p >{postHours} : {postMinutes}</p>
+                         <p className="smallText normal" style={{marginRight: '3%'}}>{month}</p>
+                         <p className="smallText normal" style={{marginRight: '10%'}}>{day}</p>
+                         <p className="smallText normal">{postHours}</p>
+                         <p className="smallText normal" style={{marginLeft: '3%', marginRight: '3%'}}>:</p>
+                         <p className="smallText normal">{postMinutes}</p>
                          </span>
                          </>}
 
                     </span>
 
-                    <span className="postContent smallText">
-                    <h1>{props.content}</h1>
+                    <span className="postContent mediumText normal">
+                    <p>{props.content}</p>
                     </span>
                  </span>
                 </span>
@@ -71,10 +74,10 @@ function Post(props) {
                
                 
                 
-                <span className="grid grid-cols-2 gap-4">
+                <span className="commentLikeSpan">
                 
-                <Like likes={props.likes} postId={props.postId} className="col-span-2" />
-                <Comment comments={props.comments} postId={props.postId} className="col-span-2" />
+                <Like likes={props.likes} postId={props.postId} className="buttons" />
+                <Comment comments={props.comments} postId={props.postId} className="buttons" />
                 </span>
                 
                 

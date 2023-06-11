@@ -55,9 +55,9 @@ function Comment(props) {
     
         return (
             <>
-               <span className="flex flex-row ">
-                <h1 className="mr-2 mt-0.5">{commentAmmount.length}</h1>
-                <button className="text-2xl hover:text-blue-900" onClick={() => commentSwitch(seeComments)}><FontAwesomeIcon icon={faCommentDollar} /></button>
+               <span className="likeButton ">
+                <h1 className="mediumText" style={{marginRight: '10%', marginLeft: '-85%', marginTop: '7%'}}>{commentAmmount.length}</h1>
+                <button className="btn-1 mediumText" style={{padding: '5% 20%'}} onClick={() => commentSwitch(seeComments)}><FontAwesomeIcon icon={faCommentDollar} /></button>
                 </span>
                 
                 

@@ -26,21 +26,21 @@ function OldComments(props) {
                 
 
                
-                    <div className="h-auto w-90 bg-slate-700 text-white text-base flex flex-col items-left mt-5 ml-10 pb-5 col-span-2 rounded-lg">
-                <span className="flex flex-row items-start">
-                <span className="grid grid-cols-[2fr,12fr]">
-                    {postImage != null && <img src={postImage} alt="Image" className="ml-4 mt-3 mr-1.5" style={{height: '2vw', width: '2vw', borderRadius: '50%'}}/>}
+                    <div className="oldComments">
+                <span className="bigSpanHolder">
+                <span className="imageHolder">
+                    {postImage != null && <img src={postImage} alt="Image" className="mediumImage"/>}
                     
                 
 
                 </span>
-                <span className="col-span-1 flex flex-col items-start -ml-80 mt-2">
-                <span className="flex flex-row items-center">
-                    {profile != null && <><h1 className="mr-2 font-bold">{profile.userName}</h1>
-                    <h1>@{profile.tag}</h1></>}
+                <span className="profileDetailHolderOne">
+                <span className="focusedProfileDetailHolder">
+                    {profile != null && <><h1 className="mediumText bold" style={{marginRight: '0.7vw'}}>{profile.userName}</h1>
+                    <p className="mediumText normal">@{profile.tag}</p></>}
                 </span>
-                <span className="row-span-1 col-span-1">
-                <h1>{removeQuotes(comment.content)}</h1>
+                <span className="contentHolder">
+                <p className="mediumText normal">{removeQuotes(comment.content)}</p>
                 </span>
                 </span>
                 </span>

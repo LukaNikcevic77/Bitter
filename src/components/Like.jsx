@@ -21,9 +21,10 @@ function Like(props) {
     
         return (
             <>
-            <span className="flex flex-row items-center ml-52">
-                <h1 className="mr-2">{likeAmmount}</h1>
-                <button className="text-2xl hover:text-4xl" 
+            <span className="likeButton">
+                <h1 className="mediumText" style={{marginRight: '10%', marginLeft: '10%', marginTop: '7%'}}>{likeAmmount}</h1>
+                <button className="btn-1 mediumText" 
+                style={{padding: '5% 20%'}}
                  onClick={() => {
                     if (!liked && loggedInUserId != null) {
                         setLikeAmmount((prevLikeAmount) => {
