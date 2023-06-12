@@ -20,7 +20,7 @@ function Feed(props){
         <>
         <input
            type="text"
-            className="w-2/3 bg-black text-white text-base mt-20 py-5 px-10 rounded-3xl"
+            className="searchBar smallText"
             placeholder="Search"
             value={searchValue}
             onChange={(e) => {setSearchValue(e.target.value)}}
@@ -36,7 +36,7 @@ function Feed(props){
                 })
                 .map((correctProfile) => {
 
-                    return <div className="h-2/3 w-2/3 bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-12 rounded-lg hover:cursor-pointer"
+                    return <div className="searchBarField smallText"
                     onClick={() => {setProfileToShowCast(correctProfile.userId); setSearchValue(""); setShowcaseOn(true)}}
                     >
                         @ {correctProfile.tag}

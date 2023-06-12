@@ -51,50 +51,51 @@ function ProfileShowcase(){
     return (<>
     {profileToShowCase != loggedInUserId && profileToShowCase != null && 
     <>
-        <div className="h-auto w-full bg-slate-500 text-white text-base flex flex-col items-left mt-10 -mb-10 rounded-lg pl-20 pb-10 -ml-10 ">
-                <span className="grid grid-cols-[2fr,12fr]">
-                    <div className="-ml-16 mt-14"  style={{ height: '5vw', width: '5vw', borderRadius: '50%' }}>
-                        <img style={{ height: '5vw', width: '5vw', borderRadius: '50%' }} src={postImage} alt="Image"/>
-                    </div>
+        <div className="profileShowcase">
+                <span className="contentHolder">
                     
-                <span className="col-span-1 flex flex-col items-start ml-4 mt-2">
+                        <img className="mediumImage" src={postImage} alt="Image"/>
+                    
+                    
+                <span className="profileInfo">
                     
 
                         {profile != null &&
                          <>
-                         <span className="flex flex-row items-center bg-blue-300 mt-3">
-                         <h1 className="font-bold mr-2 text-xl">{profile.userName}</h1>
-                         <h1 className="mr-2">@{profile.tag}</h1>
+                         <span className="naming">
+                         <h1 className="smallText bold">{profile.userName}</h1>
+                         <p className="smallText" style={{marginLeft: '1vw'}}>@{profile.tag}</p>
                          
                          </span>
-                         <span className="grid grid-cols-2 gap-4">
-                            <h1>Following</h1>
-                            <h1>Followers</h1>
-                            <p className="pl-8 font-bold -mt-2">{profile.following.length}</p>
-                            <p className="pl-8 font-bold -mt-2">{profile.followers.length}</p>
+                         <span className="followingContainer">
+                            <h1 className="smallText normal">Following</h1>
+                            <h1 className="smallText normal">Followers</h1>
+                            <p className="bold smallText" style={{paddingLeft: '2vw', marginLeft: '-0.2', marginTop: '-1vw'}}>{profile.following.length}</p>
+                            <p className="bold smallText" style={{paddingLeft: '2vw', marginLeft: '-0.2', marginTop: '-1vw'}}>{profile.followers.length}</p>
 
                          </span>
                          </>}
 
                     
                 </span>
-                {profile != null &&  <p className="mt-2 row-span-1 col-span-2 -ml-16">{profile.bio}</p>}
+                {profile != null &&  <p className="bio mediumText">{profile.bio}</p>}
             </span>
 
             {!amFollowing && <>
-                <button className="w-full -ml-5 py-5 mt-5 rounded-full bg-blue-500 hover:bg-blue-300"
+                <button className="btn-1 mediumText"
                onClick={() => {follow(profile, currUser, "follow"); setProfile(profileToShowCaseObject)}}>Follow</button>
             </>}
             {amFollowing && <>
-                <button className="w-full -ml-5 py-5 mt-5 rounded-full bg-blue-300 hover:bg-blue-500"
+                <button className="btn-2 mediumText"
                onClick={() => {
                 follow(profile, currUser, "unfollow");  setProfile(profileToShowCaseObject);
                 }}>Unfollow</button>
             </>}
                
                     </div>
+                    <div style={{marginLeft: '-2vw'}}>
                {profile != null && <PostsByCreator targetedUser={profile.userId}/> } 
-      
+               </div>
                     </>
     }
    </> )

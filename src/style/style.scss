@@ -46,6 +46,7 @@ $contrast: #EEEEEE;
     .smallText {
         font-size: 1vw;
         
+        
     }
     .ultraSmallText {
         font-size: 0.5vw;
@@ -173,13 +174,11 @@ $contrast: #EEEEEE;
         .secondThird{
             width: 50%;
             padding-bottom: 20vw;
-            background-color: #3b82f6;
             overflow-y: auto;
         }
 
         .lastThird {
             width: 30%;
-            background-color: #34d399;
             margin-top: 1vw;
             overflow-y: auto;
         }
@@ -214,7 +213,6 @@ $contrast: #EEEEEE;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                background-color: #90cdf4;
                 margin-top: 0.4vw;
             }
 
@@ -238,8 +236,11 @@ $contrast: #EEEEEE;
             margin-left: 5%;
             border-radius: 2vw;
             padding-bottom: 2%;
+            padding-right: 2%;
             cursor: pointer;
-
+            overflow-x: auto;
+            scrollbar-width: thin;
+            
             &:hover {
                 cursor: pointer;
             }
@@ -247,6 +248,7 @@ $contrast: #EEEEEE;
             .gridPostContainer {
                 display: grid;
                 grid-template-columns: 2fr 12fr;
+                
             }
 
             .postDetailsContainer {
@@ -256,13 +258,15 @@ $contrast: #EEEEEE;
                 grid-column: span 1;
                 margin-top: 2%;
                 
+       
                 .postNameAndTime {
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                    background-color: #90cdf4;
                     margin-top: 1%;
                     width: 100%;
+
+                    
                 }
 
                 .postContent {
@@ -301,7 +305,6 @@ $contrast: #EEEEEE;
     .makeComment {
         height: auto;
         width: 90%;
-        background-color: slate-700;
         color: white;
         font-size: 1rem;
         display: flex;
@@ -398,7 +401,86 @@ $contrast: #EEEEEE;
             }
         }
     }
-    
+    .profileShowcase{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        height: auto;
+        margin-top: 2vw;
+        margin-bottom: 1vw;
+        border-radius: 0.7vw;
+        padding-left: 0.5vw;
+        padding-bottom: 0.5vw;
+        margin-left: -0.5vw;
+        background-color: $lighter;
+        color: $contrast;
+        .contentHolder {
+            display: grid;
+            grid-template-columns: 2fr 12fr;
+
+            .bio {
+                margin-top: 0.3vw;
+                grid-row: span 1;
+                grid-column: span 2;
+                margin-left: -0.4vw;
+            }
+        }
+        .profileInfo {
+            grid-column: span 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-left: 1vw;
+            margin-top: 0.5vw;
+            
+            .naming {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 0.5vw;
+                margin-bottom: 1vw;
+            }
+            .followingContainer {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2vw;
+                margin-left: 2vw;
+                margin-bottom: 1vw;
+            }
+        }
+    }
+
+    .searchBar {
+        width: 80%;
+        height: 3vh;
+        background-color: black;
+        color: $contrast;
+        margin-top: 2vw;
+        padding: 0.5vw 1vw;
+        border-radius: 1vw;
+        outline: none;
+        border: none;
+    }
+    .searchBarField{
+        height: 5vh;
+        width: 50%;
+        background-color: $lighter;
+        color: $contrast;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: center;
+        padding-left: 1vw;
+        margin-left: 2vw;
+        border-radius: 1vw;
+        cursor: pointer;
+
+        &:hover {
+            cursor: pointer;
+            background-color: $darkest
+        }
+    }
 
 
     //BUttons: 
@@ -454,7 +536,9 @@ $contrast: #EEEEEE;
 
       
 
-
+      
       
       
   }
+
+  

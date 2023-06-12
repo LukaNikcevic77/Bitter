@@ -31,37 +31,36 @@ function ProfileTab() {
 
     return (
         <>
-    <div className="flex flex-col items-center w-full">
         {loggedInUserId != null && 
         
-        <div className="h-auto w-full bg-slate-500 text-white text-base flex flex-col items-left mt-20 -mb-10 rounded-lg pl-20 pb-10">
-                <span className="grid grid-cols-[2fr,12fr]">
-                    <div className="-ml-16 mt-14"  style={{ height: '5vw', width: '5vw', borderRadius: '50%' }}>
-                        <img style={{ height: '5vw', width: '5vw', borderRadius: '50%' }} src={postImage} alt="Image"/>
-                    </div>
+        <div className="profileShowcase" style={{maxWidth: '90%', marginLeft: '1vw'}}>
+                <span className="contentHolder">
+                   
+                        <img className="mediumImage" src={postImage} alt="Image"/>
+                   
                     
-                <span className="col-span-1 flex flex-col items-start ml-4 mt-2">
+                <span className="profileInfo">
                     
 
                         {profile != null &&
                          <>
-                         <span className="flex flex-row items-center bg-blue-300 mt-3">
-                         <h1 className="font-bold mr-2 text-xl">{profile.userName}</h1>
-                         <h1 className="mr-2">@{profile.tag}</h1>
+                         <span className="naming" style={{marginLeft: '2.3vw'}}>
+                         <h1 className="smallText bold">{profile.userName}</h1>
+                         <h1 className="smallText" style={{marginLeft: '1vw'}}>@{profile.tag}</h1>
                          
                          </span>
-                         <span className="grid grid-cols-2 gap-4">
-                            <h1>Following</h1>
-                            <h1>Followers</h1>
-                            <p className="pl-8 font-bold -mt-2">{profile.following.length}</p>
-                            <p className="pl-8 font-bold -mt-2">{profile.followers.length}</p>
+                         <span className="followingContainer">
+                            <h1 className="smallText normal">Following</h1>
+                            <h1 className="smallText normal">Followers</h1>
+                            <p className="bold smallText" style={{paddingLeft: '2vw', marginLeft: '-0.2', marginTop: '-1vw'}}>{profile.following.length}</p>
+                            <p className="bold smallText" style={{paddingLeft: '2vw', marginLeft: '-0.2', marginTop: '-1vw'}}>{profile.followers.length}</p>
 
                          </span>
                          </>}
 
                     
                 </span>
-                {profile != null &&  <p className="mt-2 row-span-1 col-span-2 -ml-16">{profile.bio}</p>}
+                {profile != null &&  <p className="bio mediumText" style={{marginLeft: '2vw'}}>{profile.bio}</p>}
                
             </span>
                     </div>
@@ -69,7 +68,7 @@ function ProfileTab() {
             }
             
 
-    </div>
+   
                 {profile != null &&  <PostsByCreator targetedUser={loggedInUserId}/>}
         </>
     )
