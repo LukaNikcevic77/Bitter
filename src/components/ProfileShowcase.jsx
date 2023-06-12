@@ -80,8 +80,8 @@ function ProfileShowcase(){
                 </span>
                 {profile != null &&  <p className="bio mediumText">{profile.bio}</p>}
             </span>
-
-            {!amFollowing && <>
+            {loggedInUserId != null && <>
+              {!amFollowing && <>
                 <button className="btn-1 mediumText"
                onClick={() => {follow(profile, currUser, "follow"); setProfile(profileToShowCaseObject)}}>Follow</button>
             </>}
@@ -91,6 +91,8 @@ function ProfileShowcase(){
                 follow(profile, currUser, "unfollow");  setProfile(profileToShowCaseObject);
                 }}>Unfollow</button>
             </>}
+            </>}
+            
                
                     </div>
                     <div style={{marginLeft: '-2vw'}}>
