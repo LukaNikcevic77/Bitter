@@ -38,7 +38,7 @@ for me was to bring reusage of code and prop drilling to bare minimum, and try t
     
 
 
-[Live preview](https://clout-b3565.firebaseapp.com/Home)
+[Live preview](https://clout-b3565.firebaseapp.com)
 
 [Github code](https://github.com/LukaNikcevic77/Bitter)
 
