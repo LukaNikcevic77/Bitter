@@ -1,6 +1,6 @@
 # <a href="https://clout-b3565.firebaseapp.com">Bitter</a>
 
-###  App where you write meanest stuff to your friends and collegues
+###  App where you write meanest stuff to your friends and colleagues
 
 **Note:** 
 This webpage was made to be responsive on major desktop screen sizes only! Main focus wasnt to have prettiest app ever but responsive one for desktop sizes!
